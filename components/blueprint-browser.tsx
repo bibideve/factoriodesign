@@ -34,7 +34,7 @@ export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
 
       return matchesQuery && matchesCategory && matchesDifficulty;
     });
-  }, [query, category, difficulty]);
+  }, [blueprints, query, category, difficulty]);
 
   return (
     <div style={{ display: "grid", gap: "1.25rem" }}>

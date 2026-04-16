@@ -53,7 +53,7 @@ export default function TopBuildsPage() {
           >
             <div>
               <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>
-                Editor's shortlist
+                Editor&apos;s shortlist
               </p>
               <h2 style={{ margin: 0, fontSize: "1.7rem" }}>
                 Blueprints worth importing right now
