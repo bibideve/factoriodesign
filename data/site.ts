@@ -15,6 +15,7 @@ export type Blueprint = {
   usesBeacons: boolean;
   usesModules: boolean;
   throughput: string;
+  blueprintString: string;
 };
 
 export type Feature = {
@@ -41,6 +42,8 @@ export const navLinks = [
   { href: "/create", label: "Publish" },
   { href: "/specs", label: "About" },
 ];
+
+import { demoBlueprintString } from "@/data/blueprint-demo";
 
 export const factorioCategories = [
   "Smelting",
@@ -140,6 +143,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "4 belts in / 4 belts out",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-green-circuit-beaconed",
@@ -159,6 +163,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: true,
     usesModules: true,
     throughput: "1 blue belt green circuits",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-starter-smelter",
@@ -178,6 +183,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "2 yellow belts iron/copper plates",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-oil-cracking",
@@ -197,6 +203,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: true,
     throughput: "5 refineries, ~900 petroleum/s",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-rail-intersection",
@@ -216,6 +223,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "4-direction, 2-lane",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-nuclear-2x2",
@@ -235,6 +243,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: true,
     throughput: "480 MW continuous",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-science-red-green",
@@ -254,6 +263,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "45/min red + 45/min green",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-solar-ratio",
@@ -273,6 +283,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "~42 MW per tile",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-city-block",
@@ -292,6 +303,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "Template (varies by fill)",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-laser-turret-wall",
@@ -311,6 +323,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "24 laser turrets per segment",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-starter-mall",
@@ -330,6 +343,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: false,
     usesModules: false,
     throughput: "~30 different items",
+    blueprintString: demoBlueprintString,
   },
   {
     id: "bp-red-circuit-beaconed",
@@ -349,6 +363,7 @@ export const blueprints: Blueprint[] = [
     usesBeacons: true,
     usesModules: true,
     throughput: "1 blue belt red circuits",
+    blueprintString: demoBlueprintString,
   },
 ];
 

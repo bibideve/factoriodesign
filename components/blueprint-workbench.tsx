@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { CopyButton } from "@/components/copy-button";
 
 import {
   type BlueprintDemo,
@@ -267,8 +268,13 @@ export function BlueprintWorkbench({
 
           {activeTab === "string" && (
             <div className="blueprint-string-card">
-              <h2 style={{ margin: 0, fontSize: "1rem" }}>Import-ready blueprint string</h2>
-              <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>Version byte 0 + base64 + zlib payload.</p>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "start", gap: "0.5rem", flexWrap: "wrap" }}>
+                <div>
+                  <h2 style={{ margin: 0, fontSize: "1rem" }}>Import-ready blueprint string</h2>
+                  <p className="muted" style={{ margin: "0.25rem 0 0", fontSize: "0.85rem" }}>Copy this string and paste it in Factorio with Ctrl+V.</p>
+                </div>
+                <CopyButton text={blueprint.blueprintString} label="Copy to clipboard" />
+              </div>
               <div className="blueprint-string-card__frame">
                 <pre>{blueprint.blueprintString}</pre>
               </div>

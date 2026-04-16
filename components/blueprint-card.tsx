@@ -1,4 +1,8 @@
+"use client";
+
 import type { Blueprint } from "@/data/site";
+import { BlueprintPreview } from "@/components/blueprint-preview";
+import { CopyButton } from "@/components/copy-button";
 
 type BlueprintCardProps = {
   blueprint: Blueprint;
@@ -7,6 +11,8 @@ type BlueprintCardProps = {
 export function BlueprintCard({ blueprint }: BlueprintCardProps) {
   return (
     <article className="blueprint-card card">
+      <BlueprintPreview blueprintString={blueprint.blueprintString} height={100} />
+
       <div className="blueprint-card__top">
         <div>
           <p className="blueprint-card__category">{blueprint.category}</p>
@@ -89,9 +95,12 @@ export function BlueprintCard({ blueprint }: BlueprintCardProps) {
         ))}
       </div>
 
-      <div className="blueprint-card__footer">
-        <span>By {blueprint.author}</span>
-        <span>{blueprint.favorites} favorites</span>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "0.5rem" }}>
+        <div className="blueprint-card__footer" style={{ display: "flex", gap: "0.75rem" }}>
+          <span>By {blueprint.author}</span>
+          <span>{blueprint.favorites} fav</span>
+        </div>
+        <CopyButton text={blueprint.blueprintString} label="Copy" />
       </div>
     </article>
   );
