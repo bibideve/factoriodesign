@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #08111f;
-  --surface: rgba(8, 17, 31, 0.7);
-  --surface-strong: rgba(9, 21, 39, 0.95);
-  --line: rgba(148, 163, 184, 0.18);
-  --text: #e2e8f0;
-  --muted: #94a3b8;
-  --accent: #38bdf8;
-  --accent-strong: #22c55e;
-  --accent-warm: #f59e0b;
-  --shadow: 0 24px 80px rgba(8, 15, 30, 0.45);
+  --background: #1f1b17;
+  --surface: rgba(46, 40, 34, 0.84);
+  --surface-strong: rgba(34, 28, 23, 0.97);
+  --line: rgba(163, 135, 86, 0.26);
+  --text: #ebe2cf;
+  --muted: #b9aa8f;
+  --accent: #d0872d;
+  --accent-strong: #a95b27;
+  --accent-warm: #f2c572;
+  --shadow: 0 22px 70px rgba(8, 6, 4, 0.5);
 }
 
 * {
@@ -25,12 +25,12 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 28%),
-    radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 22%),
-    linear-gradient(180deg, #07101d 0%, #0b1728 45%, #08111f 100%);
+    radial-gradient(circle at top left, rgba(242, 197, 114, 0.08), transparent 28%),
+    radial-gradient(circle at top right, rgba(208, 135, 45, 0.1), transparent 24%),
+    linear-gradient(180deg, #15120f 0%, #211b16 48%, #181411 100%);
   color: var(--text);
   font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Trebuchet MS", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
 
@@ -47,8 +47,8 @@ select {
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.35);
-  color: white;
+  background: rgba(208, 135, 45, 0.45);
+  color: #fff7ea;
 }
 
 .page-shell {
@@ -62,10 +62,10 @@ select {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.03) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.55), transparent 92%);
+    linear-gradient(rgba(163, 135, 86, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(163, 135, 86, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent 95%);
 }
 
 .container {
@@ -83,9 +83,9 @@ select {
   gap: 0.5rem;
   padding: 0.45rem 0.8rem;
   border-radius: 999px;
-  border: 1px solid rgba(56, 189, 248, 0.24);
-  background: rgba(15, 23, 42, 0.5);
-  color: #bae6fd;
+  border: 1px solid rgba(208, 135, 45, 0.28);
+  background: rgba(31, 26, 21, 0.72);
+  color: #f2c572;
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -95,14 +95,15 @@ select {
 .panel {
   background: var(--surface);
   border: 1px solid var(--line);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
 }
 
 .card {
   border-radius: 1.5rem;
-  background: rgba(8, 17, 31, 0.86);
-  border: 1px solid rgba(148, 163, 184, 0.14);
+  background:
+    linear-gradient(180deg, rgba(61, 52, 42, 0.92), rgba(31, 26, 21, 0.92));
+  border: 1px solid rgba(163, 135, 86, 0.22);
   box-shadow: var(--shadow);
 }
 
@@ -123,14 +124,14 @@ select {
 }
 
 .button-primary {
-  background: linear-gradient(135deg, var(--accent), #2563eb);
-  color: white;
-  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.28);
+  background: linear-gradient(180deg, #d89741, #a95b27);
+  color: #fff6e8;
+  box-shadow: 0 12px 30px rgba(107, 51, 19, 0.28);
 }
 
 .button-secondary {
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(163, 135, 86, 0.28);
+  background: rgba(39, 32, 26, 0.82);
   color: var(--text);
 }
 
@@ -144,7 +145,7 @@ select {
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid rgba(56, 189, 248, 0.85);
+  outline: 2px solid rgba(242, 197, 114, 0.85);
   outline-offset: 2px;
 }
 
@@ -162,9 +163,9 @@ select:focus-visible {
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(18px);
-  background: rgba(7, 16, 29, 0.68);
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  backdrop-filter: blur(14px);
+  background: rgba(24, 20, 17, 0.88);
+  border-bottom: 1px solid rgba(163, 135, 86, 0.22);
 }
 
 .header-inner {
@@ -197,10 +198,10 @@ select:focus-visible {
   display: inline-grid;
   place-items: center;
   border-radius: 0.95rem;
-  color: white;
+  color: #fff8ee;
   font-weight: 800;
-  background: linear-gradient(135deg, #22c55e, #0ea5e9);
-  box-shadow: 0 10px 28px rgba(14, 165, 233, 0.24);
+  background: linear-gradient(180deg, #d89741, #74411c);
+  box-shadow: 0 10px 28px rgba(116, 65, 28, 0.28);
 }
 
 .nav-links {
@@ -220,7 +221,322 @@ select:focus-visible {
 .nav-link:hover,
 .nav-link-active {
   color: var(--text);
-  background: rgba(15, 23, 42, 0.72);
+  background: rgba(66, 54, 42, 0.72);
+}
+
+.workbench-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.92fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.workbench-main,
+.workbench-side {
+  display: grid;
+  gap: 1rem;
+}
+
+.tool-card {
+  padding: 1.15rem;
+}
+
+.blueprint-toolbar {
+  display: grid;
+  gap: 1rem;
+}
+
+.blueprint-toolbar__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.blueprint-toolbar h1 {
+  margin: 0.6rem 0 0;
+  font-size: clamp(2rem, 4.4vw, 3.7rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.blueprint-toolbar__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.blueprint-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(163, 135, 86, 0.22);
+  background: rgba(29, 24, 20, 0.8);
+  color: var(--text);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.88rem;
+}
+
+.blueprint-chip strong {
+  color: var(--accent-warm);
+}
+
+.blueprint-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.8rem;
+}
+
+.blueprint-summary-grid div {
+  border-radius: 1rem;
+  padding: 0.9rem;
+  background: rgba(28, 23, 19, 0.82);
+  border: 1px solid rgba(163, 135, 86, 0.18);
+  display: grid;
+  gap: 0.25rem;
+}
+
+.blueprint-summary-grid span {
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.blueprint-summary-grid strong {
+  font-size: 1.1rem;
+}
+
+.blueprint-layout-card__header,
+.inventory-card__header,
+.schema-card__header,
+.library-card__header,
+.toolbar-block__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.status-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 999px;
+  display: inline-block;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(208, 135, 45, 0.12);
+}
+
+.blueprint-layout-card__header h2,
+.inventory-card__header h2,
+.schema-card__header h2,
+.library-card__header h2,
+.toolbar-block__header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.blueprint-layout-card__header p,
+.inventory-card__header p,
+.schema-card__header p,
+.library-card__header p,
+.toolbar-block__header p {
+  margin: 0.25rem 0 0;
+}
+
+.blueprint-canvas {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+}
+
+.blueprint-canvas__grid {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background:
+    linear-gradient(180deg, rgba(38, 32, 27, 0.86), rgba(20, 17, 14, 0.86));
+  border: 1px solid rgba(163, 135, 86, 0.18);
+}
+
+.blueprint-canvas__cell {
+  min-height: 54px;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(100, 83, 60, 0.18);
+  background: rgba(24, 20, 17, 0.72);
+  padding: 0.4rem;
+  display: grid;
+  place-items: center;
+}
+
+.blueprint-canvas__empty {
+  background:
+    linear-gradient(180deg, rgba(31, 26, 21, 0.44), rgba(22, 18, 15, 0.44));
+}
+
+.blueprint-entity {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  gap: 0.2rem;
+  border-radius: 0.65rem;
+  color: #f9f2df;
+  text-align: center;
+}
+
+.blueprint-entity img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+}
+
+.blueprint-entity span {
+  font-size: 0.62rem;
+  line-height: 1.15;
+  color: #f0e2c2;
+}
+
+.entity-belt {
+  background: linear-gradient(180deg, rgba(146, 109, 42, 0.45), rgba(103, 74, 24, 0.3));
+}
+
+.entity-machine {
+  background: linear-gradient(180deg, rgba(163, 115, 67, 0.42), rgba(97, 60, 29, 0.28));
+}
+
+.entity-power {
+  background: linear-gradient(180deg, rgba(198, 163, 83, 0.36), rgba(112, 84, 27, 0.24));
+}
+
+.entity-output {
+  background: linear-gradient(180deg, rgba(112, 87, 61, 0.42), rgba(71, 55, 39, 0.24));
+}
+
+.entity-default {
+  background: linear-gradient(180deg, rgba(95, 79, 60, 0.42), rgba(57, 46, 36, 0.24));
+}
+
+.blueprint-canvas__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.blueprint-canvas__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.legend-swatch {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.inventory-list,
+.schema-list,
+.library-list {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.inventory-item,
+.library-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 0.85rem;
+  border-radius: 0.95rem;
+  background: rgba(29, 24, 20, 0.84);
+  border: 1px solid rgba(163, 135, 86, 0.16);
+}
+
+.inventory-item img,
+.library-item img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  flex: none;
+}
+
+.inventory-item__name,
+.library-item__name {
+  font-weight: 700;
+}
+
+.inventory-item__count,
+.library-item__meta {
+  margin-left: auto;
+  color: var(--accent-warm);
+  font-weight: 700;
+}
+
+.schema-item {
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.95rem;
+  background: rgba(29, 24, 20, 0.84);
+  border: 1px solid rgba(163, 135, 86, 0.16);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.schema-item code,
+.blueprint-string-card code {
+  font-family:
+    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.schema-item__path {
+  color: var(--accent-warm);
+  font-size: 0.82rem;
+}
+
+.schema-item__value {
+  color: var(--text);
+  font-size: 0.92rem;
+}
+
+.blueprint-string-card pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #f2e8d4;
+}
+
+.blueprint-string-card {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.blueprint-string-card__frame {
+  border-radius: 1rem;
+  border: 1px solid rgba(163, 135, 86, 0.16);
+  background: rgba(24, 20, 17, 0.78);
+  padding: 0.95rem;
+}
+
+.library-item__stack {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.tool-empty-text {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
 }
 
 .compact-button {
@@ -536,6 +852,7 @@ select:focus-visible {
 }
 
 @media (max-width: 960px) {
+  .workbench-grid,
   .hero-grid,
   .workflow-grid,
   .cta-card,
@@ -556,6 +873,12 @@ select:focus-visible {
 @media (max-width: 760px) {
   .nav-links {
     display: none;
+  }
+
+  .blueprint-toolbar__header,
+  .inventory-item,
+  .library-item {
+    align-items: start;
   }
 
   .stat-grid,
