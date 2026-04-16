@@ -1,16 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #1f1b17;
-  --surface: rgba(46, 40, 34, 0.84);
-  --surface-strong: rgba(34, 28, 23, 0.97);
-  --line: rgba(163, 135, 86, 0.26);
-  --text: #ebe2cf;
-  --muted: #b9aa8f;
-  --accent: #d0872d;
-  --accent-strong: #a95b27;
-  --accent-warm: #f2c572;
-  --shadow: 0 22px 70px rgba(8, 6, 4, 0.5);
+  --bg-dark: #1a1a1a;
+  --bg-panel: #242424;
+  --bg-card: #2a2a2a;
+  --bg-inset: #1e1e1e;
+  --bg-input: #1f1f1f;
+  --border: #3a3a3a;
+  --border-subtle: #333;
+  --text: #e8e6e3;
+  --text-secondary: #9e9e9e;
+  --text-dim: #6b6b6b;
+  --accent: #f0a030;
+  --accent-hover: #fbb040;
+  --accent-dim: rgba(240, 160, 48, 0.15);
+  --red: #e04040;
+  --green: #50b050;
+  --blue: #4a9eff;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -24,14 +31,11 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(242, 197, 114, 0.08), transparent 28%),
-    radial-gradient(circle at top right, rgba(208, 135, 45, 0.1), transparent 24%),
-    linear-gradient(180deg, #15120f 0%, #211b16 48%, #181411 100%);
+  background: var(--bg-dark);
   color: var(--text);
-  font-family:
-    "Trebuchet MS", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 a {
@@ -47,64 +51,48 @@ select {
 }
 
 ::selection {
-  background: rgba(208, 135, 45, 0.45);
-  color: #fff7ea;
+  background: rgba(240, 160, 48, 0.35);
+  color: #fff;
 }
 
 .page-shell {
   position: relative;
-  overflow: hidden;
-}
-
-.page-shell::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(163, 135, 86, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(163, 135, 86, 0.045) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent 95%);
 }
 
 .container {
-  width: min(1180px, calc(100vw - 2rem));
+  width: min(1200px, calc(100vw - 2rem));
   margin: 0 auto;
 }
 
 .section {
-  padding: 4rem 0;
+  padding: 3rem 0;
 }
 
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.45rem 0.8rem;
-  border-radius: 999px;
-  border: 1px solid rgba(208, 135, 45, 0.28);
-  background: rgba(31, 26, 21, 0.72);
-  color: #f2c572;
-  font-size: 0.82rem;
-  font-weight: 700;
+  gap: 0.4rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--bg-inset);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow);
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
 }
 
 .card {
-  border-radius: 1.5rem;
-  background:
-    linear-gradient(180deg, rgba(61, 52, 42, 0.92), rgba(31, 26, 21, 0.92));
-  border: 1px solid rgba(163, 135, 86, 0.22);
-  box-shadow: var(--shadow);
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
 }
 
 .button-primary,
@@ -112,32 +100,34 @@ select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  border-radius: 999px;
-  padding: 0.95rem 1.35rem;
-  font-weight: 700;
-  transition:
-    transform 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease,
-    opacity 160ms ease;
+  gap: 0.5rem;
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: background 120ms ease, border-color 120ms ease;
 }
 
 .button-primary {
-  background: linear-gradient(180deg, #d89741, #a95b27);
-  color: #fff6e8;
-  box-shadow: 0 12px 30px rgba(107, 51, 19, 0.28);
+  background: var(--accent);
+  color: #1a1a1a;
+}
+
+.button-primary:hover {
+  background: var(--accent-hover);
 }
 
 .button-secondary {
-  border: 1px solid rgba(163, 135, 86, 0.28);
-  background: rgba(39, 32, 26, 0.82);
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
   color: var(--text);
 }
 
-.button-primary:hover,
 .button-secondary:hover {
-  transform: translateY(-1px);
+  border-color: var(--text-dim);
+  background: var(--bg-card);
 }
 
 .button-primary:focus-visible,
@@ -145,27 +135,28 @@ select {
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 2px solid rgba(242, 197, 114, 0.85);
-  outline-offset: 2px;
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 
 .muted {
-  color: var(--muted);
+  color: var(--text-secondary);
 }
 
 .grid-auto {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.75rem;
 }
+
+/* Header */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 20;
-  backdrop-filter: blur(14px);
-  background: rgba(24, 20, 17, 0.88);
-  border-bottom: 1px solid rgba(163, 135, 86, 0.22);
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
 }
 
 .header-inner {
@@ -173,13 +164,13 @@ select:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.6rem 0;
 }
 
 .brand-mark {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
 }
 
 .brand-mark strong,
@@ -187,59 +178,71 @@ select:focus-visible {
   display: block;
 }
 
+.brand-mark strong {
+  font-size: 0.95rem;
+}
+
 .brand-mark small {
-  color: var(--muted);
-  margin-top: 0.15rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
 }
 
 .brand-badge {
-  width: 2.7rem;
-  height: 2.7rem;
+  width: 2rem;
+  height: 2rem;
   display: inline-grid;
   place-items: center;
-  border-radius: 0.95rem;
-  color: #fff8ee;
+  border-radius: 4px;
+  color: #1a1a1a;
   font-weight: 800;
-  background: linear-gradient(180deg, #d89741, #74411c);
-  box-shadow: 0 10px 28px rgba(116, 65, 28, 0.28);
+  font-size: 0.75rem;
+  background: var(--accent);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  flex-wrap: wrap;
+  gap: 0.25rem;
 }
 
 .nav-link {
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  color: var(--muted);
-  transition: color 160ms ease, background 160ms ease;
+  padding: 0.4rem 0.65rem;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  transition: color 120ms ease, background 120ms ease;
 }
 
-.nav-link:hover,
-.nav-link-active {
+.nav-link:hover {
   color: var(--text);
-  background: rgba(66, 54, 42, 0.72);
+  background: var(--bg-inset);
 }
+
+.nav-link-active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+
+/* Workbench layout */
 
 .workbench-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.92fr);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.85fr);
+  gap: 0.75rem;
   align-items: start;
 }
 
 .workbench-main,
 .workbench-side {
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .tool-card {
-  padding: 1.15rem;
+  padding: 1rem;
 }
+
+/* Blueprint toolbar */
 
 .blueprint-toolbar {
   display: grid;
@@ -255,59 +258,65 @@ select:focus-visible {
 }
 
 .blueprint-toolbar h1 {
-  margin: 0.6rem 0 0;
-  font-size: clamp(2rem, 4.4vw, 3.7rem);
-  line-height: 0.96;
-  letter-spacing: -0.05em;
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .blueprint-toolbar__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.4rem;
 }
 
 .blueprint-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  border-radius: 999px;
-  border: 1px solid rgba(163, 135, 86, 0.22);
-  background: rgba(29, 24, 20, 0.8);
-  color: var(--text);
-  padding: 0.55rem 0.85rem;
-  font-size: 0.88rem;
+  gap: 0.35rem;
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  background: var(--bg-inset);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .blueprint-chip strong {
-  color: var(--accent-warm);
+  color: var(--accent);
 }
+
+/* Summary grid */
 
 .blueprint-summary-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
 }
 
 .blueprint-summary-grid div {
-  border-radius: 1rem;
-  padding: 0.9rem;
-  background: rgba(28, 23, 19, 0.82);
-  border: 1px solid rgba(163, 135, 86, 0.18);
+  border-radius: 4px;
+  padding: 0.65rem 0.75rem;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
   display: grid;
-  gap: 0.25rem;
+  gap: 0.15rem;
 }
 
 .blueprint-summary-grid span {
-  color: var(--muted);
-  font-size: 0.86rem;
+  color: var(--text-dim);
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .blueprint-summary-grid strong {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
+
+/* Card headers */
 
 .blueprint-layout-card__header,
 .inventory-card__header,
@@ -318,17 +327,16 @@ select:focus-visible {
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   flex-wrap: wrap;
 }
 
 .status-dot {
-  width: 0.6rem;
-  height: 0.6rem;
-  border-radius: 999px;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
   display: inline-block;
-  background: var(--accent);
-  box-shadow: 0 0 0 4px rgba(208, 135, 45, 0.12);
+  background: var(--green);
 }
 
 .blueprint-layout-card__header h2,
@@ -337,7 +345,7 @@ select:focus-visible {
 .library-card__header h2,
 .toolbar-block__header h2 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 .blueprint-layout-card__header p,
@@ -345,38 +353,39 @@ select:focus-visible {
 .schema-card__header p,
 .library-card__header p,
 .toolbar-block__header p {
-  margin: 0.25rem 0 0;
+  margin: 0.2rem 0 0;
 }
+
+/* Blueprint canvas / grid preview */
 
 .blueprint-canvas {
   position: relative;
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .blueprint-canvas__grid {
   display: grid;
-  gap: 0.18rem;
-  padding: 0.75rem;
-  border-radius: 1rem;
-  background:
-    linear-gradient(180deg, rgba(38, 32, 27, 0.86), rgba(20, 17, 14, 0.86));
-  border: 1px solid rgba(163, 135, 86, 0.18);
+  gap: 2px;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
 }
 
 .blueprint-canvas__cell {
-  min-height: 54px;
-  border-radius: 0.8rem;
-  border: 1px solid rgba(100, 83, 60, 0.18);
-  background: rgba(24, 20, 17, 0.72);
-  padding: 0.4rem;
+  min-height: 48px;
+  border-radius: 2px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-panel);
+  padding: 0.25rem;
   display: grid;
   place-items: center;
 }
 
 .blueprint-canvas__empty {
-  background:
-    linear-gradient(180deg, rgba(31, 26, 21, 0.44), rgba(22, 18, 15, 0.44));
+  background: var(--bg-dark);
+  border-color: transparent;
 }
 
 .blueprint-entity {
@@ -384,44 +393,50 @@ select:focus-visible {
   height: 100%;
   display: grid;
   place-items: center;
-  gap: 0.2rem;
-  border-radius: 0.65rem;
-  color: #f9f2df;
+  gap: 0.15rem;
+  border-radius: 2px;
+  color: var(--text);
   text-align: center;
 }
 
 .blueprint-entity img {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
 }
 
 .blueprint-entity span {
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   line-height: 1.15;
-  color: #f0e2c2;
+  color: var(--text-secondary);
 }
 
 .entity-belt {
-  background: linear-gradient(180deg, rgba(146, 109, 42, 0.45), rgba(103, 74, 24, 0.3));
+  background: rgba(240, 160, 48, 0.12);
+  border: 1px solid rgba(240, 160, 48, 0.25);
 }
 
 .entity-machine {
-  background: linear-gradient(180deg, rgba(163, 115, 67, 0.42), rgba(97, 60, 29, 0.28));
+  background: rgba(100, 160, 200, 0.12);
+  border: 1px solid rgba(100, 160, 200, 0.25);
 }
 
 .entity-power {
-  background: linear-gradient(180deg, rgba(198, 163, 83, 0.36), rgba(112, 84, 27, 0.24));
+  background: rgba(200, 180, 80, 0.12);
+  border: 1px solid rgba(200, 180, 80, 0.25);
 }
 
 .entity-output {
-  background: linear-gradient(180deg, rgba(112, 87, 61, 0.42), rgba(71, 55, 39, 0.24));
+  background: rgba(140, 120, 90, 0.12);
+  border: 1px solid rgba(140, 120, 90, 0.25);
 }
 
 .entity-default {
-  background: linear-gradient(180deg, rgba(95, 79, 60, 0.42), rgba(57, 46, 36, 0.24));
+  background: rgba(120, 120, 120, 0.12);
+  border: 1px solid rgba(120, 120, 120, 0.25);
 }
+
+/* Legend */
 
 .blueprint-canvas__legend {
   display: flex;
@@ -432,177 +447,198 @@ select:focus-visible {
 .blueprint-canvas__legend span {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  font-size: 0.84rem;
-  color: var(--muted);
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
 }
 
 .legend-swatch {
-  width: 0.85rem;
-  height: 0.85rem;
-  border-radius: 0.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  border: 1px solid var(--border);
 }
+
+/* Inventory */
 
 .inventory-list,
 .schema-list,
 .library-list {
   display: grid;
-  gap: 0.7rem;
+  gap: 0.5rem;
 }
 
 .inventory-item,
 .library-item {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem 0.85rem;
-  border-radius: 0.95rem;
-  background: rgba(29, 24, 20, 0.84);
-  border: 1px solid rgba(163, 135, 86, 0.16);
+  gap: 0.65rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
 }
 
 .inventory-item img,
 .library-item img {
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
   object-fit: contain;
   flex: none;
 }
 
 .inventory-item__name,
 .library-item__name {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.875rem;
 }
 
 .inventory-item__count,
 .library-item__meta {
   margin-left: auto;
-  color: var(--accent-warm);
+  color: var(--accent);
   font-weight: 700;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
+/* Schema */
+
 .schema-item {
-  padding: 0.85rem 0.95rem;
-  border-radius: 0.95rem;
-  background: rgba(29, 24, 20, 0.84);
-  border: 1px solid rgba(163, 135, 86, 0.16);
+  padding: 0.6rem 0.7rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
   display: grid;
-  gap: 0.35rem;
+  gap: 0.2rem;
 }
 
 .schema-item code,
 .blueprint-string-card code {
-  font-family:
-    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .schema-item__path {
-  color: var(--accent-warm);
-  font-size: 0.82rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .schema-item__value {
   color: var(--text);
-  font-size: 0.92rem;
+  font-size: 0.875rem;
 }
+
+/* Blueprint string card */
 
 .blueprint-string-card pre {
   margin: 0;
   white-space: pre-wrap;
   word-break: break-word;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  color: #f2e8d4;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .blueprint-string-card {
   display: grid;
-  gap: 0.9rem;
+  gap: 0.75rem;
 }
 
 .blueprint-string-card__frame {
-  border-radius: 1rem;
-  border: 1px solid rgba(163, 135, 86, 0.16);
-  background: rgba(24, 20, 17, 0.78);
-  padding: 0.95rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-inset);
+  padding: 0.75rem;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .library-item__stack {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.15rem;
 }
 
 .tool-empty-text {
   margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
+  color: var(--text-secondary);
+  line-height: 1.6;
 }
 
 .compact-button {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
 }
+
+/* Hero */
 
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.9fr);
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: center;
 }
 
 .hero-title {
-  margin: 1rem 0 0;
+  margin: 0.75rem 0 0;
   max-width: 12ch;
-  font-size: clamp(3rem, 7vw, 5.8rem);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 0.95;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.04em;
 }
 
 .hero-copy {
-  margin: 1.5rem 0 0;
-  max-width: 42rem;
-  color: #cbd5e1;
-  font-size: 1.08rem;
-  line-height: 1.75;
+  margin: 1rem 0 0;
+  max-width: 40rem;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
 }
+
+/* Stats */
 
 .stat-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem;
+  gap: 0.5rem;
 }
 
 .stat-card {
-  padding: 1rem 1.1rem;
+  padding: 0.75rem;
   display: grid;
-  gap: 0.25rem;
+  gap: 0.15rem;
 }
 
 .stat-card strong {
-  font-size: 1.55rem;
+  font-size: 1.3rem;
+  color: var(--accent);
 }
 
 .stat-card span {
-  color: var(--muted);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
 }
 
+/* Hero preview */
+
 .hero-preview {
-  padding: 1.35rem;
+  padding: 1rem;
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .preview-badge {
   width: fit-content;
-  padding: 0.45rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(34, 197, 94, 0.16);
-  border: 1px solid rgba(34, 197, 94, 0.24);
-  color: #bbf7d0;
-  font-size: 0.82rem;
-  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+  background: rgba(80, 176, 80, 0.15);
+  border: 1px solid rgba(80, 176, 80, 0.3);
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .preview-header {
@@ -613,60 +649,60 @@ select:focus-visible {
 }
 
 .preview-header h2 {
-  margin: 0.35rem 0 0;
-  font-size: 1.6rem;
+  margin: 0.25rem 0 0;
+  font-size: 1.35rem;
 }
 
 .preview-label {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .preview-score {
   display: inline-grid;
   place-items: center;
-  min-width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 1rem;
-  background: rgba(56, 189, 248, 0.14);
-  color: #7dd3fc;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 4px;
+  background: var(--accent-dim);
+  color: var(--accent);
   font-weight: 800;
 }
 
 .preview-visual {
   position: relative;
-  min-height: 300px;
-  border-radius: 1.35rem;
+  min-height: 280px;
+  border-radius: 4px;
   overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  background:
-    radial-gradient(circle at center, rgba(56, 189, 248, 0.12), transparent 50%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.45));
+  border: 1px solid var(--border);
+  background: var(--bg-inset);
 }
 
 .preview-grid {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(148, 163, 184, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.09) 1px, transparent 1px);
-  background-size: 28px 28px;
+    linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.5;
 }
 
 .preview-node,
 .preview-rail {
   position: absolute;
-  border-radius: 999px;
+  border-radius: 4px;
 }
 
 .preview-node {
-  width: 5rem;
-  height: 5rem;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.85), rgba(14, 165, 233, 0.85));
-  box-shadow: 0 20px 45px rgba(14, 165, 233, 0.24);
+  width: 4rem;
+  height: 4rem;
+  background: var(--accent);
+  opacity: 0.7;
 }
 
 .preview-node-a {
@@ -685,8 +721,9 @@ select:focus-visible {
 }
 
 .preview-rail {
-  height: 0.7rem;
-  background: linear-gradient(90deg, rgba(245, 158, 11, 0.4), rgba(56, 189, 248, 0.7));
+  height: 0.5rem;
+  background: var(--accent);
+  opacity: 0.35;
 }
 
 .preview-rail-a {
@@ -706,66 +743,71 @@ select:focus-visible {
 .preview-metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
 
 .preview-metrics div {
-  padding: 0.9rem;
-  border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  padding: 0.65rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
   display: grid;
-  gap: 0.2rem;
+  gap: 0.15rem;
 }
 
 .preview-metrics span,
 .blueprint-card__metrics span,
 .blueprint-card__footer {
-  color: var(--muted);
-  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
 }
+
+/* Feature / workflow / insight cards */
 
 .feature-card,
 .workflow-card,
 .insight-card {
-  padding: 1.35rem;
+  padding: 1rem;
   display: grid;
-  gap: 0.8rem;
+  gap: 0.6rem;
 }
 
 .feature-card h3,
 .workflow-card h3,
 .insight-card h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 }
 
 .feature-metric,
 .insight-title {
   margin: 0;
-  color: #7dd3fc;
-  font-size: 0.9rem;
-  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .workflow-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .workflow-card span {
-  color: #fcd34d;
+  color: var(--accent);
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
 }
 
+/* Blueprint card */
+
 .blueprint-card {
-  padding: 1.25rem;
+  padding: 1rem;
   display: grid;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .blueprint-card__top,
@@ -773,83 +815,89 @@ select:focus-visible {
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .blueprint-card__category {
   margin: 0;
-  color: #7dd3fc;
-  font-size: 0.82rem;
-  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 .blueprint-card h3 {
-  margin: 0.45rem 0 0;
-  font-size: 1.35rem;
+  margin: 0.3rem 0 0;
+  font-size: 1.1rem;
 }
 
 .blueprint-card__rating {
-  min-width: 3rem;
-  height: 3rem;
+  min-width: 2.5rem;
+  height: 2.5rem;
   display: inline-grid;
   place-items: center;
-  border-radius: 0.95rem;
-  background: rgba(56, 189, 248, 0.15);
-  color: #7dd3fc;
+  border-radius: 4px;
+  background: var(--accent-dim);
+  color: var(--accent);
   font-weight: 800;
+  font-size: 0.9rem;
 }
 
 .blueprint-card__metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 .blueprint-card__metrics div {
-  padding: 0.9rem;
-  border-radius: 1rem;
-  background: rgba(15, 23, 42, 0.46);
-  border: 1px solid rgba(148, 163, 184, 0.12);
+  padding: 0.6rem;
+  border-radius: 4px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
   display: grid;
-  gap: 0.15rem;
+  gap: 0.1rem;
 }
 
 .blueprint-card__tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
+  gap: 0.35rem;
 }
 
 .blueprint-card__tags span {
-  padding: 0.45rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  color: #cbd5e1;
-  font-size: 0.82rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
 }
 
+/* CTA */
+
 .cta-card {
-  padding: 1.5rem;
+  padding: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .cta-card h2 {
-  margin: 0.9rem 0 0.75rem;
+  margin: 0.6rem 0 0.5rem;
   max-width: 18ch;
-  font-size: clamp(1.9rem, 3vw, 2.9rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
 }
 
 .cta-actions {
   display: flex;
-  gap: 0.9rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
+
+/* Responsive */
 
 @media (max-width: 960px) {
   .workbench-grid,

@@ -15,7 +15,7 @@ export function BlueprintCard({ blueprint }: BlueprintCardProps) {
         <div className="blueprint-card__rating">{blueprint.rating.toFixed(1)}</div>
       </div>
 
-      <p className="muted">{blueprint.description}</p>
+      <p className="muted" style={{ margin: 0, fontSize: "0.85rem", lineHeight: 1.6 }}>{blueprint.description}</p>
 
       <div className="blueprint-card__metrics">
         <div>

@@ -11,6 +11,16 @@ type BlueprintBrowserProps = {
   blueprints: Blueprint[];
 };
 
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  borderRadius: "4px",
+  border: "1px solid var(--border)",
+  background: "var(--bg-input)",
+  color: "var(--text)",
+  padding: "0.6rem 0.75rem",
+  fontSize: "0.875rem",
+};
+
 export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
@@ -37,18 +47,18 @@ export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
   }, [blueprints, query, category, difficulty]);
 
   return (
-    <div style={{ display: "grid", gap: "1.25rem" }}>
-      <div className="card" style={{ padding: "1.25rem" }}>
+    <div style={{ display: "grid", gap: "0.75rem" }}>
+      <div className="card" style={{ padding: "1rem" }}>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "2fr 1fr 1fr",
-            gap: "0.9rem",
+            gap: "0.75rem",
           }}
         >
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span className="muted" style={{ fontSize: "0.92rem" }}>
-              Search blueprints
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+              Search
             </span>
             <input
               value={query}
@@ -58,8 +68,8 @@ export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
             />
           </label>
 
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span className="muted" style={{ fontSize: "0.92rem" }}>
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
               Category
             </span>
             <select
@@ -75,8 +85,8 @@ export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
             </select>
           </label>
 
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span className="muted" style={{ fontSize: "0.92rem" }}>
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
               Difficulty
             </span>
             <select
@@ -95,25 +105,26 @@ export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
 
         <div
           style={{
-            marginTop: "1rem",
+            marginTop: "0.75rem",
             display: "flex",
             justifyContent: "space-between",
-            gap: "1rem",
+            gap: "0.75rem",
+            alignItems: "center",
             flexWrap: "wrap",
           }}
         >
-          <p className="muted" style={{ margin: 0 }}>
-            {visibleBlueprints.length} blueprints matched your filters.
+          <p className="muted" style={{ margin: 0, fontSize: "0.85rem" }}>
+            {visibleBlueprints.length} blueprint{visibleBlueprints.length !== 1 ? "s" : ""} matched
           </p>
           <button
             type="button"
-            className="button-secondary"
+            className="button-secondary compact-button"
             onClick={() => {
               setQuery("");
               setCategory("All");
               setDifficulty("All");
             }}
-            style={{ border: "none", cursor: "pointer" }}
+            style={{ cursor: "pointer" }}
           >
             Reset filters
           </button>
@@ -128,12 +139,3 @@ export function BlueprintBrowser({ blueprints }: BlueprintBrowserProps) {
     </div>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  borderRadius: "0.95rem",
-  border: "1px solid rgba(148, 163, 184, 0.16)",
-  background: "rgba(15, 23, 42, 0.7)",
-  color: "var(--text)",
-  padding: "0.95rem 1rem",
-};
