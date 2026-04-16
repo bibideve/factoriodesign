@@ -57,188 +57,196 @@ export function BlueprintWorkbench({
   const height = bounds.maxY - bounds.minY + 1;
 
   return (
-    <div className="tool-shell">
-      <section className="tool-topbar card">
-        <div>
-          <p className="eyebrow">Blueprint workbench</p>
-          <h1 className="tool-title">{blueprint.label}</h1>
-          <p className="tool-copy">{blueprint.description}</p>
-        </div>
-
-        <div className="tool-meta-grid">
-          <div className="tool-meta-card">
-            <span>Blueprint string</span>
-            <strong>{blueprint.blueprintString.length} chars</strong>
-          </div>
-          <div className="tool-meta-card">
-            <span>Entities</span>
-            <strong>{decoded.blueprint.entities.length}</strong>
-          </div>
-          <div className="tool-meta-card">
-            <span>Footprint</span>
-            <strong>
-              {width} x {height}
-            </strong>
-          </div>
-          <div className="tool-meta-card">
-            <span>Output lane</span>
-            <strong>4 furnaces</strong>
-          </div>
-        </div>
-      </section>
-
-      <div className="tool-grid">
-        <section className="card tool-panel">
-          <div className="tool-panel__header">
+    <div className="workbench-grid">
+      <div className="workbench-main">
+        <section className="card tool-card blueprint-toolbar">
+          <div className="blueprint-toolbar__header">
             <div>
-              <p className="panel-kicker">Schema view</p>
-              <h2>Decoded layout from the blueprint string</h2>
+              <p className="eyebrow">Blueprint workbench</p>
+              <h1>{blueprint.label}</h1>
+              <p className="muted" style={{ margin: "1rem 0 0", maxWidth: "46rem", lineHeight: 1.75 }}>
+                {blueprint.description}
+              </p>
             </div>
-            <span className="tool-badge">Vanilla starter line</span>
+            <div className="blueprint-toolbar__meta">
+              <span className="blueprint-chip">
+                String <strong>{blueprint.blueprintString.length}</strong>
+              </span>
+              <span className="blueprint-chip">
+                Entities <strong>{decoded.blueprint.entities.length}</strong>
+              </span>
+              <span className="blueprint-chip">
+                Footprint <strong>{width}x{height}</strong>
+              </span>
+            </div>
           </div>
 
-          <div
-            className="blueprint-schema"
-            style={
-              {
-                "--schema-columns": width,
-                "--schema-rows": height,
-              } as React.CSSProperties
-            }
-          >
-            {decoded.blueprint.entities.map((entity) => {
-              const column = entity.position.x - bounds.minX + 1;
-              const row = entity.position.y - bounds.minY + 1;
-              const iconPath = factorioAssetMap[entity.name].src;
-
-              return (
-                <div
-                  className={`schema-cell schema-cell--${entity.name}`}
-                  key={entity.entity_number}
-                  style={{ gridColumn: column, gridRow: row }}
-                  title={`${entityLabels[entity.name]} (#${entity.entity_number})`}
-                >
-                  <Image
-                    src={iconPath}
-                    alt={entityLabels[entity.name]}
-                    width={42}
-                    height={42}
-                    unoptimized
-                  />
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="schema-legend">
-            {legendOrder.map((name) => (
-              <div className="schema-legend__item" key={name}>
-                <Image
-                  src={factorioAssetMap[name].src}
-                  alt={entityLabels[name]}
-                  width={28}
-                  height={28}
-                  unoptimized
-                />
-                <span>{entityLabels[name]}</span>
-              </div>
-            ))}
+          <div className="blueprint-summary-grid">
+            <div>
+              <span>Workbench mode</span>
+              <strong>Decode and inspect</strong>
+            </div>
+            <div>
+              <span>Build type</span>
+              <strong>Starter smelting lane</strong>
+            </div>
+            <div>
+              <span>Output lane</span>
+              <strong>4 furnaces</strong>
+            </div>
+            <div>
+              <span>Item types</span>
+              <strong>{counts.length}</strong>
+            </div>
           </div>
         </section>
 
-        <section className="card tool-panel">
-          <div className="tool-panel__header">
+        <section className="card tool-card">
+          <div className="blueprint-layout-card__header">
             <div>
-              <p className="panel-kicker">Items needed</p>
-              <h2>What to place for this blueprint</h2>
+              <p className="eyebrow">Schema view</p>
+              <h2>Decoded layout from the blueprint string</h2>
+              <p className="muted">Entity positions come straight from the decoded JSON payload.</p>
             </div>
-            <span className="tool-badge">Derived from entity names</span>
+            <span className="blueprint-chip">
+              <span className="status-dot" />
+              Live grid
+            </span>
           </div>
 
-          <div className="item-list">
-            {counts.map((item) => (
-              <div className="item-row" key={item.name}>
-                <div className="item-row__main">
+          <div className="blueprint-canvas">
+            <div
+              className="blueprint-canvas__grid"
+              style={{
+                gridTemplateColumns: `repeat(${width}, minmax(0, 1fr))`,
+              }}
+            >
+              {Array.from({ length: width * height }, (_, index) => {
+                const x = (index % width) + bounds.minX;
+                const y = Math.floor(index / width) + bounds.minY;
+                const entity = decoded.blueprint.entities.find(
+                  (entry) => entry.position.x === x && entry.position.y === y,
+                );
+
+                if (!entity) {
+                  return <div className="blueprint-canvas__cell blueprint-canvas__empty" key={`${x}-${y}`} />;
+                }
+
+                const asset = factorioAssetMap[entity.name];
+                const entityClass =
+                  asset.group === "belt"
+                    ? "entity-belt"
+                    : asset.group === "power"
+                      ? "entity-power"
+                      : asset.group === "storage"
+                        ? "entity-output"
+                        : "entity-machine";
+
+                return (
+                  <div className="blueprint-canvas__cell" key={entity.entity_number}>
+                    <div className={`blueprint-entity ${entityClass}`}>
+                      <Image
+                        src={asset.src}
+                        alt={entityLabels[entity.name]}
+                        width={32}
+                        height={32}
+                        unoptimized
+                      />
+                      <span>{entityLabels[entity.name]}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="blueprint-canvas__legend">
+              {legendOrder.map((name) => (
+                <span key={name}>
                   <Image
-                    src={factorioAssetMap[item.name].src}
-                    alt={entityLabels[item.name]}
-                    width={36}
-                    height={36}
+                    src={factorioAssetMap[name].src}
+                    alt={entityLabels[name]}
+                    width={18}
+                    height={18}
                     unoptimized
                   />
-                  <div>
-                    <strong>{entityLabels[item.name]}</strong>
-                    <span>{item.name}</span>
-                  </div>
-                </div>
-                <strong className="item-row__count">x{item.count}</strong>
-              </div>
-            ))}
-          </div>
-
-          <div className="tool-summary-grid">
-            <div className="summary-box">
-              <span>Total placeables</span>
-              <strong>{decoded.blueprint.entities.length}</strong>
-            </div>
-            <div className="summary-box">
-              <span>Distinct item types</span>
-              <strong>{counts.length}</strong>
+                  {entityLabels[name]}
+                </span>
+              ))}
             </div>
           </div>
         </section>
       </div>
 
-      <div className="tool-grid">
-        <section className="card tool-panel">
-          <div className="tool-panel__header">
+      <div className="workbench-side">
+        <section className="card tool-card">
+          <div className="inventory-card__header">
             <div>
-              <p className="panel-kicker">Blueprint string</p>
-              <h2>Import-ready source</h2>
+              <p className="eyebrow">Items needed</p>
+              <h2>What to place for this blueprint</h2>
+              <p className="muted">Counts are derived from entity names inside the blueprint data.</p>
             </div>
-            <span className="tool-badge">Starts with version byte 0</span>
           </div>
-          <pre className="blueprint-string-block">{blueprint.blueprintString}</pre>
+
+          <div className="inventory-list">
+            {counts.map((item) => (
+              <div className="inventory-item" key={item.name}>
+                <Image
+                  src={factorioAssetMap[item.name].src}
+                  alt={entityLabels[item.name]}
+                  width={32}
+                  height={32}
+                  unoptimized
+                />
+                <div>
+                  <div className="inventory-item__name">{entityLabels[item.name]}</div>
+                  <div className="muted">{item.name}</div>
+                </div>
+                <div className="inventory-item__count">x{item.count}</div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <section className="card tool-panel">
-          <div className="tool-panel__header">
+        <section className="card tool-card blueprint-string-card">
+          <div className="toolbar-block__header">
             <div>
-              <p className="panel-kicker">Decoded schema</p>
+              <p className="eyebrow">Blueprint string</p>
+              <h2>Import-ready source</h2>
+              <p className="muted">Version byte 0 + base64 + zlib payload.</p>
+            </div>
+          </div>
+          <div className="blueprint-string-card__frame">
+            <pre>{blueprint.blueprintString}</pre>
+          </div>
+        </section>
+
+        <section className="card tool-card">
+          <div className="schema-card__header">
+            <div>
+              <p className="eyebrow">Decoded schema</p>
               <h2>Useful fields from the string</h2>
-            </div>
-            <span className="tool-badge">zlib + base64 decode</span>
-          </div>
-
-          <div className="schema-notes">
-            <div className="summary-box">
-              <span>Label</span>
-              <strong>{decoded.blueprint.label}</strong>
-            </div>
-            <div className="summary-box">
-              <span>Description</span>
-              <strong>{decoded.blueprint.description}</strong>
-            </div>
-            <div className="summary-box">
-              <span>Version</span>
-              <strong>{decoded.blueprint.version}</strong>
+              <p className="muted">The viewer exposes the practical fields a builder cares about first.</p>
             </div>
           </div>
 
-          <ul className="decoded-list">
-            <li>
-              The layout uses entity positions from the decoded JSON instead of a
-              decorative landing-page mock.
-            </li>
-            <li>
-              Item counts are computed from entity names in the blueprint data,
-              so the materials panel stays in sync with the schema view.
-            </li>
-            <li>
-              Real Factorio icons are used for drills, belts, inserters,
-              furnaces, poles, and the output chest.
-            </li>
-          </ul>
+          <div className="schema-list">
+            <div className="schema-item">
+              <div className="schema-item__path">blueprint.label</div>
+              <div className="schema-item__value">{decoded.blueprint.label}</div>
+            </div>
+            <div className="schema-item">
+              <div className="schema-item__path">blueprint.description</div>
+              <div className="schema-item__value">{decoded.blueprint.description}</div>
+            </div>
+            <div className="schema-item">
+              <div className="schema-item__path">blueprint.version</div>
+              <div className="schema-item__value">{decoded.blueprint.version}</div>
+            </div>
+            <div className="schema-item">
+              <div className="schema-item__path">blueprint.entities.length</div>
+              <div className="schema-item__value">{decoded.blueprint.entities.length}</div>
+            </div>
+          </div>
         </section>
       </div>
     </div>
