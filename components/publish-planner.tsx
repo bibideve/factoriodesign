@@ -2,6 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { factorioCategories } from "@/data/site";
+import { BlueprintPreview } from "@/components/blueprint-preview";
+import {
+  decodeBlueprintStringClient,
+  getEntityCounts,
+  getBlueprintBounds,
+  getEntityIcon,
+  getEntityLabel,
+} from "@/data/blueprint-decode";
 
 const gameVersions = ["1.1", "2.0"] as const;
 const gamePhases = ["Early game", "Mid game", "Late game", "Megabase"] as const;
@@ -33,6 +41,17 @@ export function PublishPlanner() {
   const [description, setDescription] = useState("");
 
   const isValidString = blueprintString.startsWith("0") && blueprintString.length > 10;
+
+  const decoded = useMemo(() => {
+    if (!isValidString) return null;
+    return decodeBlueprintStringClient(blueprintString);
+  }, [blueprintString, isValidString]);
+
+  const entities = decoded?.blueprint?.entities ?? [];
+  const counts = useMemo(() => getEntityCounts(entities), [entities]);
+  const bounds = useMemo(() => getBlueprintBounds(entities), [entities]);
+  const gridWidth = entities.length > 0 ? bounds.maxX - bounds.minX + 1 : 0;
+  const gridHeight = entities.length > 0 ? bounds.maxY - bounds.minY + 1 : 0;
 
   const completion = useMemo(() => {
     const checks = [
@@ -195,6 +214,93 @@ export function PublishPlanner() {
             {category} &middot; {gamePhase} &middot; {beltTier} belt &middot; v{gameVersion}
           </p>
         </div>
+
+        {/* Live blueprint preview */}
+        {isValidString && decoded && entities.length > 0 ? (
+          <div style={{ display: "grid", gap: "0.5rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-secondary)" }}>
+                Layout preview
+              </span>
+              <span className="blueprint-chip" style={{ padding: "0.2rem 0.45rem", fontSize: "0.7rem" }}>
+                <span className="status-dot" />
+                Live
+              </span>
+            </div>
+            <BlueprintPreview blueprintString={blueprintString} height={200} />
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.35rem" }}>
+              <div className="publish-preview__stat">
+                <span>Entities</span>
+                <strong>{entities.length}</strong>
+              </div>
+              <div className="publish-preview__stat">
+                <span>Types</span>
+                <strong>{counts.length}</strong>
+              </div>
+              <div className="publish-preview__stat">
+                <span>Grid</span>
+                <strong>{gridWidth}&times;{gridHeight}</strong>
+              </div>
+            </div>
+            {decoded.blueprint.label && (
+              <div style={{ fontSize: "0.78rem", color: "var(--text-secondary)" }}>
+                <span style={{ color: "var(--accent)", fontFamily: "'SFMono-Regular', Consolas, monospace", fontSize: "0.72rem" }}>
+                  label
+                </span>{" "}
+                {decoded.blueprint.label}
+              </div>
+            )}
+            <div className="publish-preview__entities">
+              {counts.slice(0, 8).map((item) => (
+                <div key={item.name} className="publish-preview__entity-row">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={getEntityIcon(item.name)}
+                    alt={getEntityLabel(item.name)}
+                    width={20}
+                    height={20}
+                  />
+                  <span>{getEntityLabel(item.name)}</span>
+                  <span className="publish-preview__entity-count">&times;{item.count}</span>
+                </div>
+              ))}
+              {counts.length > 8 && (
+                <div className="muted" style={{ fontSize: "0.75rem", textAlign: "center", padding: "0.2rem 0" }}>
+                  +{counts.length - 8} more entity types
+                </div>
+              )}
+            </div>
+          </div>
+        ) : isValidString && decoded && entities.length === 0 ? (
+          <div
+            style={{
+              padding: "1rem",
+              borderRadius: "4px",
+              background: "var(--bg-dark)",
+              border: "1px solid var(--border-subtle)",
+              textAlign: "center",
+              color: "var(--text-dim)",
+              fontSize: "0.8rem",
+            }}
+          >
+            Blueprint decoded but contains no entities
+          </div>
+        ) : (
+          <div
+            style={{
+              padding: "1.5rem 1rem",
+              borderRadius: "4px",
+              background: "var(--bg-dark)",
+              border: "1px dashed var(--border-subtle)",
+              textAlign: "center",
+              color: "var(--text-dim)",
+              fontSize: "0.8rem",
+              lineHeight: 1.6,
+            }}
+          >
+            Paste a blueprint string to see a live preview with entity icons and grid layout
+          </div>
+        )}
 
         {/* Completion */}
         <div>
