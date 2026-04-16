@@ -12,8 +12,8 @@ export default function BlueprintsPage() {
       <div className="container">
         <SectionHeading
           eyebrow="Blueprint library"
-          title="Browse blueprints and books with faster signal density."
-          description="Filter by footprint, difficulty, compatibility, throughput, and author context. Import, skip, or clone without guesswork."
+          title="Search Factorio blueprints by category, game phase, and version"
+          description="Every blueprint is a real importable string. Filter by production type, belt tier, game phase, and Factorio version to find what fits your factory."
         />
         <BlueprintBrowser blueprints={blueprints} />
       </div>

@@ -5,22 +5,10 @@ export default function SpecsPage() {
   return (
     <div className="container section" style={{ display: "grid", gap: "1rem" }}>
       <SectionHeading
-        eyebrow="Research notes"
-        title="Notes for a community-first Factorio blueprint site"
-        description="Reframing the site around how players talk about blueprints: strings, books, imports, library storage, cloning, and sharing."
+        eyebrow="About"
+        title="How Factorio blueprints work"
+        description="Reference for the blueprint string format, game version compatibility, and community sharing standards."
       />
-
-      <section
-        className="card"
-        style={{ padding: "1rem", display: "grid", gap: "0.75rem" }}
-      >
-        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Research summary</h2>
-        <p className="muted" style={{ margin: 0, fontSize: "0.85rem", lineHeight: 1.6 }}>
-          Factorio players talk about blueprint strings, blueprint books,
-          blueprint libraries, copying, and imports. The site should feel like a
-          practical community tool for those actions.
-        </p>
-      </section>
 
       <section className="grid-auto">
         {specSections.map((section) => (
@@ -43,27 +31,55 @@ export default function SpecsPage() {
         className="card"
         style={{ padding: "1rem", display: "grid", gap: "0.6rem" }}
       >
-        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Functional requirements</h2>
-        <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--text-secondary)", lineHeight: 1.7, fontSize: "0.85rem" }}>
-          <li>Expose core routes: home, blueprint library, top builds, and a create or clone flow.</li>
-          <li>Make blueprint cards metadata rich with category, tags, rating, footprint, throughput, and version.</li>
-          <li>Provide live filtering in the library without sacrificing first-render performance.</li>
-          <li>Support the sharing loop: inspect a build, clone it, edit notes, save or reshare.</li>
-          <li>Document the community-first rationale so the terminology shift is explicit.</li>
-        </ul>
+        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Blueprint string format</h2>
+        <div style={{ display: "grid", gap: "0.4rem", fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.7 }}>
+          <p style={{ margin: 0 }}>
+            In Factorio, pressing <strong style={{ color: "var(--text)" }}>Ctrl+C</strong> on a selection or clicking{" "}
+            <strong style={{ color: "var(--text)" }}>Export to string</strong> in the blueprint editor generates a string you can share.
+          </p>
+          <p style={{ margin: 0 }}>
+            The format is: version byte <code style={{ color: "var(--accent)", fontFamily: "'SFMono-Regular', Consolas, monospace" }}>0</code>{" "}
+            + base64-encoded zlib-compressed JSON. The JSON contains entity names, positions, direction, recipe, module inventory,
+            wire connections, train schedules, and signal configurations.
+          </p>
+          <p style={{ margin: 0 }}>
+            Blueprint books wrap multiple blueprints into a single string with an index array and labels for each entry.
+            They can be nested (books inside books).
+          </p>
+        </div>
       </section>
 
       <section
         className="card"
         style={{ padding: "1rem", display: "grid", gap: "0.6rem" }}
       >
-        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Technical approach</h2>
-        <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "var(--text-secondary)", lineHeight: 1.7, fontSize: "0.85rem" }}>
-          <li>Use Next.js App Router for server-first rendering, clean routing, and strong SEO defaults.</li>
-          <li>Keep content and sample blueprint data centralized for future API integration.</li>
-          <li>Use small client components only where interactivity adds value.</li>
-          <li>Prepare the information model for user accounts, author pages, moderation, and API-backed persistence.</li>
-        </ul>
+        <h2 style={{ margin: 0, fontSize: "1.1rem" }}>Entity types in blueprints</h2>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "0.5rem" }}>
+          {[
+            { name: "Assembling machines", desc: "Crafting recipes. Set by the recipe= field." },
+            { name: "Inserters", desc: "Move items between entities. Direction and filter matter." },
+            { name: "Transport belts", desc: "Yellow (15/s), red (30/s), blue (45/s) items per second." },
+            { name: "Furnaces", desc: "Stone, steel, or electric. Smelt ores into plates." },
+            { name: "Mining drills", desc: "Electric or burner. Extract raw resources from patches." },
+            { name: "Power poles", desc: "Small, medium, big, substation. Define power and circuit networks." },
+            { name: "Chests", desc: "Wooden, iron, steel, logistic (passive/active/requester/buffer/storage)." },
+            { name: "Train entities", desc: "Locomotives, cargo wagons, fluid wagons, rail signals, stations." },
+            { name: "Fluid handling", desc: "Pipes, underground pipes, pumps, storage tanks, refineries." },
+          ].map((item) => (
+            <div
+              key={item.name}
+              style={{
+                padding: "0.6rem",
+                borderRadius: "4px",
+                background: "var(--bg-inset)",
+                border: "1px solid var(--border-subtle)",
+              }}
+            >
+              <strong style={{ fontSize: "0.85rem", display: "block", marginBottom: "0.15rem" }}>{item.name}</strong>
+              <span style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: 1.4 }}>{item.desc}</span>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

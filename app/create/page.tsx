@@ -7,9 +7,9 @@ export default function CreatePage() {
     <section className="section">
       <div className="container" style={{ display: "grid", gap: "1rem" }}>
         <SectionHeading
-          eyebrow="Create, edit, or clone"
-          title="A blueprint flow closer to the in-game toolbox"
-          description="Start from a string or book, clean up notes, add practical details, and save your own version."
+          eyebrow="Publish a blueprint"
+          title="Share your build with the Factorio community"
+          description="Export your blueprint string from Factorio, paste it here, add the details other players need, and publish it to the library."
         />
         <div className="grid-auto">
           {workflow.map((item) => (
