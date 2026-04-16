@@ -5,6 +5,7 @@ import {
   decodeBlueprintStringClient,
   getBlueprintBounds,
   getEntityColor,
+  getEntityIcon,
 } from "@/data/blueprint-decode";
 
 type BlueprintPreviewProps = {
@@ -105,17 +106,26 @@ export function BlueprintPreview({
           const x = Number(xStr) - bounds.minX + padding;
           const y = Number(yStr) - bounds.minY + padding;
           const color = getEntityColor(name);
+          const iconSrc = getEntityIcon(name);
           return (
-            <rect
-              key={key}
-              x={x}
-              y={y}
-              width={0.9}
-              height={0.9}
-              rx={0.1}
-              fill={color}
-              opacity={0.85}
-            />
+            <g key={key}>
+              <rect
+                x={x + 0.025}
+                y={y + 0.025}
+                width={0.95}
+                height={0.95}
+                rx={0.1}
+                fill={color}
+                opacity={0.25}
+              />
+              <image
+                href={iconSrc}
+                x={x + 0.05}
+                y={y + 0.05}
+                width={0.9}
+                height={0.9}
+              />
+            </g>
           );
         })}
       </svg>

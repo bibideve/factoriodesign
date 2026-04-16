@@ -962,11 +962,43 @@ select:focus-visible {
   border: 1px solid var(--border-subtle);
 }
 
-.blueprint-detail__entity-swatch {
+.blueprint-detail__entity-icon-wrap {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-subtle);
+}
+
+.blueprint-detail__entity-icon-wrap img {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.blueprint-detail__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.blueprint-detail__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.blueprint-detail__legend-item img {
   width: 1rem;
   height: 1rem;
-  border-radius: 3px;
-  flex-shrink: 0;
+  object-fit: contain;
+  image-rendering: pixelated;
 }
 
 /* CTA */

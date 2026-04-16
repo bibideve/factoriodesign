@@ -11,6 +11,8 @@ import {
   getEntityCounts,
   getBlueprintBounds,
   getEntityColor,
+  getEntityIcon,
+  getEntityLabel,
 } from "@/data/blueprint-decode";
 
 type BlueprintDetailProps = {
@@ -230,6 +232,21 @@ export function BlueprintDetail({ blueprint }: BlueprintDetailProps) {
                 </span>
               </div>
               <BlueprintPreview blueprintString={blueprint.blueprintString} height={400} />
+              <div className="blueprint-detail__legend">
+                {counts.map((item) => (
+                  <span key={item.name} className="blueprint-detail__legend-item">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={getEntityIcon(item.name)}
+                      alt={getEntityLabel(item.name)}
+                      width={16}
+                      height={16}
+                    />
+                    {getEntityLabel(item.name)}
+                    <span className="muted">&times;{item.count}</span>
+                  </span>
+                ))}
+              </div>
               {decoded?.blueprint?.label && (
                 <div className="schema-item">
                   <div className="schema-item__path">blueprint.label</div>
@@ -258,12 +275,20 @@ export function BlueprintDetail({ blueprint }: BlueprintDetailProps) {
                 {counts.map((item) => (
                   <div key={item.name} className="blueprint-detail__entity-item">
                     <div
-                      className="blueprint-detail__entity-swatch"
-                      style={{ background: getEntityColor(item.name) }}
-                    />
+                      className="blueprint-detail__entity-icon-wrap"
+                      style={{ borderColor: getEntityColor(item.name) }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={getEntityIcon(item.name)}
+                        alt={getEntityLabel(item.name)}
+                        width={32}
+                        height={32}
+                      />
+                    </div>
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{ fontWeight: 600, fontSize: "0.875rem" }}>
-                        {item.name.replace(/-/g, " ").replace(/^\w/, (c) => c.toUpperCase())}
+                        {getEntityLabel(item.name)}
                       </div>
                       <div className="muted" style={{ fontSize: "0.78rem", fontFamily: "'SFMono-Regular', Consolas, monospace" }}>
                         {item.name}
