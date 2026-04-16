@@ -12,8 +12,8 @@ export default function BlueprintsPage() {
       <div className="container">
         <SectionHeading
           eyebrow="Blueprint library"
-          title="Browse blueprints with faster signal density."
-          description="The rebuilt discovery layer surfaces quality indicators before click-through: footprint, difficulty, compatibility, throughput, and trust cues stay visible at all times."
+          title="Browse blueprints and books with faster signal density."
+          description="The library keeps footprint, difficulty, compatibility, throughput, and author context visible so players can import, skip, or clone a build without guesswork."
         />
         <div
           className="card"
@@ -23,9 +23,9 @@ export default function BlueprintsPage() {
           }}
         >
           <p className="muted" style={{ marginTop: 0 }}>
-            This demo uses a curated static dataset to represent the upgraded UX.
-            In production, these cards would be backed by searchable persistence,
-            author pages, import telemetry, moderation, and saved collections.
+            This demo uses a static dataset, but the intent is community-first:
+            searchable blueprint strings, saved blueprint books, author pages,
+            remix notes, moderation, and personal library collections.
           </p>
           <BlueprintBrowser blueprints={blueprints} />
         </div>

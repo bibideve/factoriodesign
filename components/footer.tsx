@@ -18,11 +18,11 @@ export function Footer() {
           <div>
             <p className="eyebrow">Factorio Forge</p>
             <h2 style={{ margin: "1rem 0 0.5rem", fontSize: "1.35rem" }}>
-              A cleaner way to discover and publish Factorio blueprints.
+              A cleaner way to share, clone, and organize Factorio blueprints.
             </h2>
             <p className="muted" style={{ margin: 0, maxWidth: "36rem" }}>
-              Rebuilt from scratch around performance, trust signals, and a much
-              stronger interface than the reference product.
+              Rebuilt around blueprint strings, blueprint books, fast scanning,
+              and the practical notes players need before importing a build.
             </p>
           </div>
 
@@ -43,9 +43,9 @@ export function Footer() {
               className="muted"
               style={{ margin: 0, paddingLeft: "1rem", display: "grid", gap: "0.55rem" }}
             >
-              <li>Server-rendered marketing and content routes</li>
-              <li>Client-only interactivity where discovery needs it</li>
-              <li>Data-first UI cards for fast scanning</li>
+              <li>Server-rendered community and discovery pages</li>
+              <li>Client-only interactivity where browsing needs it</li>
+              <li>Data-first cards for fast import decisions</li>
             </ul>
           </div>
         </div>

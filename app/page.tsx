@@ -17,15 +17,16 @@ export default function HomePage() {
         <div className="container">
           <div className="hero-grid">
             <div>
-              <div className="eyebrow">Rebuilt from the ground up</div>
+              <div className="eyebrow">Built for builders</div>
               <h1 className="hero-title">
-                Blueprint discovery that feels like a product, not an archive.
+                Share, clone, and edit Factorio blueprints and blueprint books.
               </h1>
               <p className="hero-copy">
-                Factorio Forge rethinks the experience behind Factorio Prints:
-                clearer trust signals, richer blueprint metadata, guided
-                publishing, and a UI that respects the density of technical
-                information without looking dated.
+                Factorio Forge is a community tool for blueprint strings and
+                blueprint books: browse proven builds, inspect the details,
+                clone someone else&apos;s layout into your own version, and keep
+                everything organized like an extension of the in-game blueprint
+                library.
               </p>
               <div
                 style={{
@@ -36,10 +37,10 @@ export default function HomePage() {
                 }}
               >
                 <Link className="button-primary" href="/blueprints">
-                  Explore blueprints
+                  Browse community builds
                 </Link>
                 <Link className="button-secondary" href="/specs">
-                  Read rewritten specs
+                  Read research notes
                 </Link>
               </div>
               <div className="stat-grid" style={{ marginTop: "2.25rem" }}>
@@ -53,7 +54,7 @@ export default function HomePage() {
             </div>
 
             <div className="card hero-preview">
-              <div className="preview-badge">Live product concept</div>
+              <div className="preview-badge">Community favorite</div>
               <div className="preview-header">
                 <div>
                   <p className="preview-label">Featured blueprint</p>
@@ -91,9 +92,9 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <SectionHeading
-            eyebrow="Why this approach is stronger"
-            title="A better product model than the legacy site"
-            description="The rebuild focuses on scannable technical detail, modern visual hierarchy, and a community workflow that encourages better submissions."
+            eyebrow="Why this fits the game better"
+            title="A community workshop instead of a business dashboard"
+            description="The rewrite leans into how players actually use Factorio blueprints: import strings, sort blueprint books, clone layouts, and share better notes with the next builder."
           />
           <div className="grid-auto">
             {features.map((feature) => (
@@ -111,8 +112,8 @@ export default function HomePage() {
         <div className="container">
           <SectionHeading
             eyebrow="Blueprint feed"
-            title="Featured designs with real decision-making context"
-            description="Each card surfaces size, version support, throughput, rating, and difficulty so players can decide before opening a details page."
+            title="Featured designs with enough detail to decide fast"
+            description="Each card keeps size, version support, throughput, rating, and difficulty visible so players know whether to import, skip, or remix the build."
           />
           <div className="grid-auto">
             {blueprints.slice(0, 3).map((blueprint) => (
@@ -125,9 +126,9 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <SectionHeading
-            eyebrow="Publisher workflow"
-            title="A guided create flow built for metadata quality"
-            description="The old-style giant form is replaced with a simple, confidence-building sequence that improves discoverability and curation."
+            eyebrow="Create, edit, clone"
+            title="A build flow shaped around the way players already share"
+            description="Instead of treating publishing like a funnel, the flow starts from a string or book, helps you edit what matters, and makes it easy to save a clean clone back to the community."
           />
           <div className="workflow-grid">
             {workflow.map((item) => (
@@ -145,8 +146,8 @@ export default function HomePage() {
         <div className="container">
           <SectionHeading
             eyebrow="Top surfaces"
-            title="Trending and curated discovery, not just infinite lists"
-            description="Community traction and editorial curation help good blueprints rise without overwhelming players with low-signal results."
+            title="Trending builds, popular books, and remixable sets"
+            description="Players can jump straight into what others are importing and copying without wading through low-signal dumps."
           />
           <div className="grid-auto">
             {topBuilds.map((build) => (
@@ -164,20 +165,21 @@ export default function HomePage() {
         <div className="container">
           <div className="card cta-card">
             <div>
-              <p className="eyebrow">Ready to launch</p>
-              <h2>Built as a cleaner foundation for a real Factorio community product.</h2>
+              <p className="eyebrow">Ready to share</p>
+              <h2>Built as a cleaner home for the blueprint-sharing side of Factorio.</h2>
               <p className="muted">
                 The current implementation is static and demo-ready, but the
-                architecture already points toward search indexing, auth,
-                moderation, author profiles, comments, and API-backed storage.
+                structure already points toward accounts, comments, moderation,
+                saved library items, blueprint book collections, and API-backed
+                storage.
               </p>
             </div>
             <div className="cta-actions">
               <Link className="button-primary" href="/create">
-                Try publish flow
+                Create or clone
               </Link>
               <Link className="button-secondary" href="/top">
-                See top builds
+                See trending builds
               </Link>
             </div>
           </div>

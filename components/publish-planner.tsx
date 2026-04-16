@@ -17,16 +17,16 @@ type Difficulty = (typeof difficulties)[number];
 
 const validationChecks = [
   {
-    label: "Technical summary",
-    description: "Footprint, throughput, and supported version are present.",
+    label: "Import basics",
+    description: "Footprint, throughput, and supported version are easy to scan.",
   },
   {
-    label: "Discovery metadata",
+    label: "Library metadata",
     description: "Category, difficulty, and searchable tags are filled in.",
   },
   {
-    label: "Player readability",
-    description: "The blueprint pitch explains why someone should import it.",
+    label: "Remix notes",
+    description: "The summary explains what changed and why someone should keep this clone.",
   },
 ];
 
@@ -115,7 +115,7 @@ export function PublishPlanner() {
         </div>
 
         <label style={{ display: "grid", gap: "0.5rem" }}>
-          <span style={{ fontWeight: 700 }}>Blueprint pitch</span>
+          <span style={{ fontWeight: 700 }}>Build notes</span>
           <textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={7} style={inputStyle} />
         </label>
       </div>
@@ -131,10 +131,10 @@ export function PublishPlanner() {
         }}
       >
         <div style={{ display: "grid", gap: "0.35rem" }}>
-          <span className="eyebrow">Validation preview</span>
-          <h3 style={{ margin: 0, fontSize: "1.35rem" }}>Submission readiness</h3>
+          <span className="eyebrow">Clone preview</span>
+          <h3 style={{ margin: 0, fontSize: "1.35rem" }}>Library readiness</h3>
           <p className="muted" style={{ margin: 0 }}>
-            Publishing is framed as a guided quality check, not just a raw textarea.
+            The flow is built around saving a usable blueprint clone, not just filling out a product form.
           </p>
         </div>
 
@@ -197,7 +197,7 @@ export function PublishPlanner() {
         </div>
 
         <button className="button-primary" type="button">
-          Publish blueprint
+          Save cloned blueprint
         </button>
       </aside>
     </div>

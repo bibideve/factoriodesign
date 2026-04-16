@@ -12,8 +12,8 @@ export default function TopBuildsPage() {
       <div className="container" style={{ display: "grid", gap: "1.5rem" }}>
         <SectionHeading
           eyebrow="Top builds"
-          title="Trending blueprints, publishers, and collections."
-          description="The old site surfaces popularity, but the experience can do more. This version gives editorial framing and richer signals so players understand why something is trending."
+          title="Trending blueprints, blueprint books, and builders."
+          description="This page leans into what the community actually shares: strong imports, reusable book sets, and creators whose work gets copied into real factories."
         />
 
         <div className="grid-auto">
@@ -53,7 +53,7 @@ export default function TopBuildsPage() {
           >
             <div>
               <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>
-                Editor&apos;s shortlist
+                Community shortlist
               </p>
               <h2 style={{ margin: 0, fontSize: "1.7rem" }}>
                 Blueprints worth importing right now
