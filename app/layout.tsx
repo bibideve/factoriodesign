@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Factorio Forge",
   description:
-    "A premium blueprint discovery and publishing experience for Factorio players.",
+    "A Factorio blueprint workbench for decoding strings, reviewing layouts, and checking required item counts.",
 };
 
 export default function RootLayout({

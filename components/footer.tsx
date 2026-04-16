@@ -18,11 +18,12 @@ export function Footer() {
           <div>
             <p className="eyebrow">Factorio Forge</p>
             <h2 style={{ margin: "1rem 0 0.5rem", fontSize: "1.35rem" }}>
-              A cleaner way to discover and publish Factorio blueprints.
+              A blueprint workbench for strings, books, layouts, and build costs.
             </h2>
             <p className="muted" style={{ margin: 0, maxWidth: "36rem" }}>
-              Rebuilt from scratch around performance, trust signals, and a much
-              stronger interface than the reference product.
+              The home route now behaves more like a tool: inspect the string,
+              view the layout, count the required items, and then browse other
+              shared builds.
             </p>
           </div>
 
@@ -38,14 +39,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 style={{ marginTop: 0, fontSize: "1rem" }}>Approach</h3>
+            <h3 style={{ marginTop: 0, fontSize: "1rem" }}>Workbench</h3>
             <ul
               className="muted"
               style={{ margin: 0, paddingLeft: "1rem", display: "grid", gap: "0.55rem" }}
             >
-              <li>Server-rendered marketing and content routes</li>
-              <li>Client-only interactivity where discovery needs it</li>
-              <li>Data-first UI cards for fast scanning</li>
+              <li>Decode a real Factorio blueprint string</li>
+              <li>Render the entity layout as a readable schema</li>
+              <li>Show the item list needed to build it</li>
             </ul>
           </div>
         </div>

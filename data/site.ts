@@ -34,68 +34,68 @@ export const navLinks = [
   { href: "/", label: "Overview" },
   { href: "/blueprints", label: "Blueprints" },
   { href: "/top", label: "Top builds" },
-  { href: "/create", label: "Publish" },
-  { href: "/specs", label: "Specs" },
+  { href: "/create", label: "Create + clone" },
+  { href: "/specs", label: "Notes" },
 ];
 
 export const heroStats = [
-  { label: "Curated blueprints", value: "1,200+" },
-  { label: "Median load time", value: "<1.4s" },
-  { label: "Guided publishing steps", value: "4" },
-  { label: "Discovery filters", value: "12" },
+  { label: "Blueprint strings shared", value: "1,200+" },
+  { label: "Blueprint books tracked", value: "340" },
+  { label: "Clone and edit steps", value: "4" },
+  { label: "Library filters", value: "12" },
 ];
 
 export const features: Feature[] = [
   {
-    title: "Discovery first",
+    title: "Import with confidence",
     description:
-      "Search, tags, blueprint health, and visual cards make it obvious what to import before a player opens the details page.",
-    metric: "Fewer dead-end clicks",
+      "Cards surface footprint, throughput, game version, and author notes before you paste anything into your save.",
+    metric: "Faster yes or no",
   },
   {
-    title: "Stronger blueprint trust",
+    title: "Blueprint-book friendly",
     description:
-      "Every entry exposes footprint, throughput, supported game version, rating, and author signals up front.",
-    metric: "Better import confidence",
+      "The site talks the same way players do: blueprint strings, blueprint books, library imports, and reusable build sets.",
+    metric: "Matches in-game tools",
   },
   {
-    title: "Fast publishing flow",
+    title: "Clone and remix flow",
     description:
-      "A guided form focuses on metadata quality and player readability instead of dumping all inputs into a single page.",
-    metric: "Higher-quality submissions",
+      "Start from a shared string or book, tweak the details, and save your own version without losing the original reference.",
+    metric: "Better community reuse",
   },
   {
-    title: "Modern visual system",
+    title: "Readable for builders",
     description:
-      "Custom gradients, glass panels, stronger typography, and dense data cards replace the dated utility-site presentation.",
-    metric: "Premium feel without clutter",
+      "The interface stays technical and dense, but it reads like a workshop for builders instead of a SaaS dashboard.",
+    metric: "Tool feel, not business feel",
   },
 ];
 
 export const workflow: WorkflowStep[] = [
   {
     step: "01",
-    title: "Paste or import blueprint string",
+    title: "Paste a blueprint string or book",
     description:
-      "Start from a raw Factorio blueprint string, a saved draft, or a shared starter template.",
+      "Start from a shared string, a saved draft, or a full blueprint book you want to browse, reuse, or break apart.",
   },
   {
     step: "02",
-    title: "Add technical metadata",
+    title: "Inspect and edit the build",
     description:
-      "Describe footprint, throughput, expected inputs, power profile, and compatible game version.",
+      "Check footprint, throughput, version support, and setup notes before you keep it in your library or pass it on.",
   },
   {
     step: "03",
-    title: "Optimize discoverability",
+    title: "Clone it into your own variant",
     description:
-      "Choose categories, tags, difficulty, and a concise pitch so players can find the design quickly.",
+      "Make a separate copy for your own base plan, update tags and notes, and keep the source build intact for reference.",
   },
   {
     step: "04",
-    title: "Publish with validation",
+    title: "Share it back with context",
     description:
-      "Run final checks for missing metadata, then publish to the community feed and trending surfaces.",
+      "Add the practical details another player needs, then post it back to the feed or drop it into a blueprint book collection.",
   },
 ];
 
@@ -199,42 +199,42 @@ export const topBuilds = [
     detail: "Saved 3.1k times in the last 7 days thanks to high throughput and clean train handoff.",
   },
   {
-    title: "Best new publisher",
+    title: "Most remixed author",
     emphasis: "CopperCloud",
-    detail: "Three compact manufacturing blueprints reached a 4.7+ average rating with clear setup notes.",
+    detail: "Players keep cloning these compact manufacturing builds into their own bus and mall layouts.",
   },
   {
-    title: "Most copied collection",
+    title: "Most copied blueprint book",
     emphasis: "Starter bus essentials",
-    detail: "A six-blueprint starter set covering smelting, mall, circuits, power, and train bootstrap.",
+    detail: "A six-blueprint starter book covering smelting, mall, circuits, power, and the first rail bootstrap.",
   },
 ];
 
 export const specSections: SpecSection[] = [
   {
-    title: "Product strategy",
+    title: "Community language",
     items: [
-      "Position the site as a premium blueprint platform, not an archive with a search box.",
-      "Prioritize clarity around what a blueprint does, how large it is, and whether it is trustworthy.",
-      "Balance community contribution with curation so top surfaces stay useful even at scale.",
+      "Talk like Factorio players talk: blueprint strings, blueprint books, imports, library storage, and build notes.",
+      "Treat the site as a community tool for sharing, cloning, editing, and organizing builds instead of a premium product pitch.",
+      "Keep clarity around what a blueprint does, how large it is, and whether it is worth importing into a real save.",
     ],
   },
   {
     title: "Information architecture",
     items: [
-      "Home page explains value proposition, quality signals, workflow, and featured content.",
-      "Blueprint library gives fast filtering by category, difficulty, tag, and version compatibility.",
-      "Top builds page highlights trending, community favorites, and collection-led discovery.",
-      "Publish page uses guided steps so creators provide metadata that improves discovery.",
+      "Home page should explain the sharing loop: discover, inspect, clone, edit, and share again.",
+      "Blueprint library should filter by category, difficulty, tag, and version while keeping import-ready details visible.",
+      "Top builds should highlight trending blueprints, popular blueprint books, and creators whose work gets remixed often.",
+      "Create page should support starting from a string or book, then turning it into your own saved version with better notes.",
     ],
   },
   {
     title: "Experience principles",
     items: [
       "Use server-rendered pages for speed and SEO, with client components only where interactivity adds value.",
-      "Keep every card scannable with metrics visible before click-through.",
-      "Replace generic bootstrap visuals with a tailored sci-fi interface aligned with Factorio themes.",
-      "Design for future extensibility: author profiles, comments, collections, moderation, and API-backed persistence.",
+      "Keep every card scannable with footprint, throughput, compatibility, and remix context visible before click-through.",
+      "Replace generic product language with a practical workshop tone aligned with Factorio communities.",
+      "Design for future extensibility: author profiles, comments, blueprint book collections, moderation, and API-backed persistence.",
     ],
   },
 ];

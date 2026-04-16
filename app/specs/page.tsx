@@ -5,9 +5,9 @@ export default function SpecsPage() {
   return (
     <div className="container section" style={{ display: "grid", gap: "1.5rem" }}>
       <SectionHeading
-        eyebrow="Rewritten product spec"
-        title="Specs for a modern replacement of Factorio Prints"
-        description="These specs translate the original site's core purpose into a clearer product strategy, stronger UX, and a more extensible technical approach."
+        eyebrow="Research notes"
+        title="Notes for a community-first Factorio blueprint site"
+        description="These notes reframe the site around the way players actually talk about blueprints: strings, books, imports, library storage, cloning, and sharing."
       />
 
       <section
@@ -18,9 +18,12 @@ export default function SpecsPage() {
           gap: "1rem",
         }}
       >
-        <h2 style={{ margin: 0, fontSize: "1.35rem" }}>Reference site summary</h2>
+        <h2 style={{ margin: 0, fontSize: "1.35rem" }}>Research summary</h2>
         <p className="muted" style={{ margin: 0, lineHeight: 1.7 }}>
-          The original site is focused on discovering, browsing, and publishing Factorio blueprints. It offers routes for general blueprint browsing, top entries, tag-led exploration, and creation, but presents them with a relatively thin shell and a dated visual system.
+          Factorio players tend to talk about blueprint strings, blueprint
+          books, blueprint libraries, copying, and imports. The site should
+          feel like a practical community tool for those actions, not a polished
+          business product wrapped around them.
         </p>
       </section>
 
@@ -55,11 +58,11 @@ export default function SpecsPage() {
       >
         <h2 style={{ margin: 0, fontSize: "1.35rem" }}>Functional requirements</h2>
         <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "#cbd5e1", lineHeight: 1.8 }}>
-          <li>Expose core routes: home, blueprint library, top builds, and publish flow.</li>
-          <li>Make blueprint cards metadata rich, with category, tags, rating, footprint, and throughput visible.</li>
+          <li>Expose core routes: home, blueprint library, top builds, and a create or clone flow.</li>
+          <li>Make blueprint cards metadata rich, with category, tags, rating, footprint, throughput, and version info visible.</li>
           <li>Provide live filtering in the library without sacrificing first-render performance.</li>
-          <li>Explain the publishing experience as a staged workflow with validation and readiness checks.</li>
-          <li>Document the product direction in a dedicated specs page so the redesign rationale is transparent.</li>
+          <li>Support the common sharing loop: inspect a build, clone it, edit the notes, and save or reshare it.</li>
+          <li>Document the community-first rationale in a dedicated notes page so the terminology shift is explicit.</li>
         </ul>
       </section>
 
@@ -75,8 +78,8 @@ export default function SpecsPage() {
         <ul style={{ margin: 0, paddingLeft: "1.2rem", color: "#cbd5e1", lineHeight: 1.8 }}>
           <li>Use Next.js App Router for server-first rendering, clean routing, and strong SEO defaults.</li>
           <li>Keep content and sample blueprint data centralized so future API integration is straightforward.</li>
-          <li>Use small client components only where user input materially improves the experience.</li>
-          <li>Prepare the information model for future user accounts, author pages, moderation, and collections.</li>
+          <li>Use small client components only where user input materially improves browsing, cloning, or editing.</li>
+          <li>Prepare the information model for future user accounts, author pages, moderation, blueprint book collections, and saved library items.</li>
         </ul>
       </section>
     </div>

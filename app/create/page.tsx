@@ -7,9 +7,9 @@ export default function CreatePage() {
     <section className="section">
       <div className="container" style={{ display: "grid", gap: "2rem" }}>
         <SectionHeading
-          eyebrow="Publish with structure"
-          title="A creator workflow built around blueprint quality"
-          description="The old create flow feels like a dump form. This redesign turns publishing into a guided checklist that improves metadata, readability, and trust."
+          eyebrow="Create, edit, or clone"
+          title="A blueprint flow that feels closer to the in-game toolbox"
+          description="Start from a blueprint string or a blueprint book, clean up the notes, add the practical details, and save your own version without turning the whole page into product-speak."
         />
         <div className="grid-auto">
           {workflow.map((item) => (

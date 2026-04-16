@@ -15,7 +15,7 @@ export function Header() {
           <span className="brand-badge">FF</span>
           <span>
             <strong>Factorio Forge</strong>
-            <small>Blueprints, upgraded</small>
+            <small>Blueprint workbench</small>
           </span>
         </Link>
 
@@ -37,7 +37,7 @@ export function Header() {
 
         <div className="header-actions">
           <Link href="/create" className="button-secondary compact-button">
-            Publish blueprint
+            Open create flow
           </Link>
         </div>
       </div>
