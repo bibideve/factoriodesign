@@ -12,23 +12,10 @@ export default function BlueprintsPage() {
       <div className="container">
         <SectionHeading
           eyebrow="Blueprint library"
-          title="Browse blueprints and books with faster signal density."
-          description="The library keeps footprint, difficulty, compatibility, throughput, and author context visible so players can import, skip, or clone a build without guesswork."
+          title="Search Factorio blueprints by category, game phase, and version"
+          description="Every blueprint is a real importable string. Filter by production type, belt tier, game phase, and Factorio version to find what fits your factory."
         />
-        <div
-          className="card"
-          style={{
-            padding: "1.25rem",
-            marginTop: "1.5rem",
-          }}
-        >
-          <p className="muted" style={{ marginTop: 0 }}>
-            This demo uses a static dataset, but the intent is community-first:
-            searchable blueprint strings, saved blueprint books, author pages,
-            remix notes, moderation, and personal library collections.
-          </p>
-          <BlueprintBrowser blueprints={blueprints} />
-        </div>
+        <BlueprintBrowser blueprints={blueprints} />
       </div>
     </div>
   );

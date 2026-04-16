@@ -1,153 +1,212 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { factorioCategories } from "@/data/site";
 
-const categories = [
-  "Manufacturing",
-  "Smelting",
-  "Logistics",
-  "Refining",
-  "Defense",
-  "Base support",
-];
+const gameVersions = ["1.1", "2.0"] as const;
+const gamePhases = ["Early game", "Mid game", "Late game", "Megabase"] as const;
+const beltTiers = ["Yellow", "Red", "Blue"] as const;
 
-const difficulties = ["Starter", "Intermediate", "Mega base"] as const;
+type GamePhase = (typeof gamePhases)[number];
+type BeltTier = (typeof beltTiers)[number];
 
-type Difficulty = (typeof difficulties)[number];
-
-const validationChecks = [
-  {
-    label: "Import basics",
-    description: "Footprint, throughput, and supported version are easy to scan.",
-  },
-  {
-    label: "Library metadata",
-    description: "Category, difficulty, and searchable tags are filled in.",
-  },
-  {
-    label: "Remix notes",
-    description: "The summary explains what changed and why someone should keep this clone.",
-  },
-];
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  borderRadius: "4px",
+  border: "1px solid var(--border)",
+  background: "var(--bg-input)",
+  color: "var(--text)",
+  padding: "0.6rem 0.75rem",
+  fontSize: "0.875rem",
+};
 
 export function PublishPlanner() {
-  const [title, setTitle] = useState("Beacon-ready iron smelter");
-  const [category, setCategory] = useState(categories[1]);
-  const [difficulty, setDifficulty] = useState<Difficulty>("Intermediate");
-  const [throughput, setThroughput] = useState("8 blue belts");
-  const [footprint, setFootprint] = useState("88 x 132");
-  const [notes, setNotes] = useState(
-    "Train-fed furnace array with expansion slots for beacon upgrades and a clean bus handoff.",
-  );
+  const [blueprintString, setBlueprintString] = useState("");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState(factorioCategories[0]);
+  const [gameVersion, setGameVersion] = useState<string>(gameVersions[0]);
+  const [gamePhase, setGamePhase] = useState<GamePhase>("Early game");
+  const [beltTier, setBeltTier] = useState<BeltTier>("Yellow");
+  const [throughput, setThroughput] = useState("");
+  const [usesBeacons, setUsesBeacons] = useState(false);
+  const [usesModules, setUsesModules] = useState(false);
+  const [description, setDescription] = useState("");
+
+  const isValidString = blueprintString.startsWith("0") && blueprintString.length > 10;
 
   const completion = useMemo(() => {
-    const fields = [title, category, difficulty, throughput, footprint, notes];
-    return Math.round((fields.filter((value) => value.trim().length > 0).length / fields.length) * 100);
-  }, [title, category, difficulty, throughput, footprint, notes]);
+    const checks = [
+      blueprintString.length > 0,
+      title.length > 0,
+      throughput.length > 0,
+      description.length > 0,
+    ];
+    const filled = checks.filter(Boolean).length;
+    return Math.round((filled / checks.length) * 100);
+  }, [blueprintString, title, throughput, description]);
 
   return (
     <div
       className="card"
       style={{
         display: "grid",
-        gap: "1.5rem",
-        padding: "1.5rem",
-        gridTemplateColumns: "minmax(0, 1.4fr) minmax(280px, 0.9fr)",
+        gap: "1rem",
+        padding: "1rem",
+        gridTemplateColumns: "minmax(0, 1.4fr) minmax(260px, 0.9fr)",
       }}
     >
-      <div style={{ display: "grid", gap: "1rem" }}>
-        <label style={{ display: "grid", gap: "0.5rem" }}>
-          <span style={{ fontWeight: 700 }}>Blueprint title</span>
+      <div style={{ display: "grid", gap: "0.75rem" }}>
+        <label style={{ display: "grid", gap: "0.35rem" }}>
+          <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Blueprint string</span>
+          <textarea
+            value={blueprintString}
+            onChange={(event) => setBlueprintString(event.target.value.trim())}
+            placeholder="Paste your Factorio blueprint string here (starts with '0'...)"
+            rows={4}
+            style={{
+              ...inputStyle,
+              fontFamily: "'SFMono-Regular', Consolas, monospace",
+              fontSize: "0.78rem",
+            }}
+          />
+          {blueprintString.length > 0 && (
+            <span style={{
+              fontSize: "0.75rem",
+              color: isValidString ? "var(--green)" : "var(--red)",
+              fontFamily: "'SFMono-Regular', Consolas, monospace",
+            }}>
+              {isValidString
+                ? `Valid format \u2014 ${blueprintString.length} chars`
+                : "Invalid \u2014 blueprint strings start with '0'"}
+            </span>
+          )}
+        </label>
+
+        <label style={{ display: "grid", gap: "0.35rem" }}>
+          <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Blueprint title</span>
           <input
             value={title}
             onChange={(event) => setTitle(event.target.value)}
-            placeholder="Name your blueprint"
+            placeholder="e.g. 48-furnace stone smelter array"
             style={inputStyle}
           />
         </label>
 
-        <div className="grid-auto">
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span style={{ fontWeight: 700 }}>Category</span>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.75rem" }}>
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Category</span>
             <select value={category} onChange={(event) => setCategory(event.target.value)} style={inputStyle}>
-              {categories.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
+              {factorioCategories.map((option) => (
+                <option key={option} value={option}>{option}</option>
               ))}
             </select>
           </label>
 
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span style={{ fontWeight: 700 }}>Difficulty</span>
-            <select
-              value={difficulty}
-              onChange={(event) => setDifficulty(event.target.value as Difficulty)}
-              style={inputStyle}
-            >
-              {difficulties.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Game version</span>
+            <select value={gameVersion} onChange={(event) => setGameVersion(event.target.value)} style={inputStyle}>
+              {gameVersions.map((option) => (
+                <option key={option} value={option}>Factorio {option}</option>
               ))}
             </select>
           </label>
 
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span style={{ fontWeight: 700 }}>Throughput</span>
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Game phase</span>
+            <select value={gamePhase} onChange={(event) => setGamePhase(event.target.value as GamePhase)} style={inputStyle}>
+              {gamePhases.map((option) => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Belt tier</span>
+            <select value={beltTier} onChange={(event) => setBeltTier(event.target.value as BeltTier)} style={inputStyle}>
+              {beltTiers.map((option) => (
+                <option key={option} value={option}>{option} belt</option>
+              ))}
+            </select>
+          </label>
+
+          <label style={{ display: "grid", gap: "0.35rem" }}>
+            <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Throughput</span>
             <input
               value={throughput}
               onChange={(event) => setThroughput(event.target.value)}
-              placeholder="e.g. 45/s"
-              style={inputStyle}
-            />
-          </label>
-
-          <label style={{ display: "grid", gap: "0.5rem" }}>
-            <span style={{ fontWeight: 700 }}>Footprint</span>
-            <input
-              value={footprint}
-              onChange={(event) => setFootprint(event.target.value)}
-              placeholder="e.g. 64 x 96"
+              placeholder="e.g. 2 blue belts iron plates"
               style={inputStyle}
             />
           </label>
         </div>
 
-        <label style={{ display: "grid", gap: "0.5rem" }}>
-          <span style={{ fontWeight: 700 }}>Build notes</span>
-          <textarea value={notes} onChange={(event) => setNotes(event.target.value)} rows={7} style={inputStyle} />
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={usesBeacons}
+              onChange={(event) => setUsesBeacons(event.target.checked)}
+              style={{ accentColor: "var(--accent)", width: "1rem", height: "1rem" }}
+            />
+            <span style={{ fontSize: "0.85rem" }}>Uses beacons</span>
+          </label>
+          <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer" }}>
+            <input
+              type="checkbox"
+              checked={usesModules}
+              onChange={(event) => setUsesModules(event.target.checked)}
+              style={{ accentColor: "var(--accent)", width: "1rem", height: "1rem" }}
+            />
+            <span style={{ fontSize: "0.85rem" }}>Uses modules</span>
+          </label>
+        </div>
+
+        <label style={{ display: "grid", gap: "0.35rem" }}>
+          <span style={{ fontWeight: 600, fontSize: "0.85rem" }}>Build description</span>
+          <textarea
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+            rows={4}
+            placeholder="Describe what this blueprint does, how to connect it, and any setup notes (e.g. 'feed iron plates from the left, output goes to blue belt on the right')"
+            style={inputStyle}
+          />
         </label>
       </div>
 
       <aside
-        className="panel"
         style={{
-          borderRadius: "1.35rem",
-          padding: "1.25rem",
+          borderRadius: "4px",
+          padding: "1rem",
+          background: "var(--bg-inset)",
+          border: "1px solid var(--border-subtle)",
           display: "grid",
-          gap: "1rem",
+          gap: "0.75rem",
           alignSelf: "start",
         }}
       >
-        <div style={{ display: "grid", gap: "0.35rem" }}>
-          <span className="eyebrow">Clone preview</span>
-          <h3 style={{ margin: 0, fontSize: "1.35rem" }}>Library readiness</h3>
-          <p className="muted" style={{ margin: 0 }}>
-            The flow is built around saving a usable blueprint clone, not just filling out a product form.
+        <div style={{ display: "grid", gap: "0.25rem" }}>
+          <span className="eyebrow">Publish preview</span>
+          <h3 style={{ margin: "0.25rem 0 0", fontSize: "1.1rem" }}>
+            {title || "Untitled blueprint"}
+          </h3>
+          <p className="muted" style={{ margin: 0, fontSize: "0.8rem" }}>
+            {category} &middot; {gamePhase} &middot; {beltTier} belt &middot; v{gameVersion}
           </p>
         </div>
 
+        {/* Completion */}
         <div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.4rem", fontWeight: 700 }}>
-            <span>Completion</span>
-            <span>{completion}%</span>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem", fontWeight: 600, fontSize: "0.85rem" }}>
+            <span>Readiness</span>
+            <span style={{ color: completion === 100 ? "var(--green)" : "var(--accent)", fontFamily: "'SFMono-Regular', Consolas, monospace" }}>{completion}%</span>
           </div>
           <div
             style={{
-              height: "0.7rem",
-              borderRadius: "999px",
-              background: "rgba(148, 163, 184, 0.12)",
+              height: "6px",
+              borderRadius: "3px",
+              background: "var(--border-subtle)",
               overflow: "hidden",
             }}
           >
@@ -155,60 +214,91 @@ export function PublishPlanner() {
               style={{
                 width: `${completion}%`,
                 height: "100%",
-                background: "linear-gradient(90deg, #38bdf8, #22c55e)",
+                background: completion === 100 ? "var(--green)" : "var(--accent)",
+                transition: "width 200ms ease",
               }}
             />
           </div>
         </div>
 
-        <div style={{ display: "grid", gap: "0.75rem" }}>
-          {validationChecks.map((check, index) => (
+        {/* Checklist */}
+        <div style={{ display: "grid", gap: "0.4rem" }}>
+          {[
+            { label: "Blueprint string pasted", done: blueprintString.length > 0 && isValidString },
+            { label: "Title filled in", done: title.length > 0 },
+            { label: "Throughput specified", done: throughput.length > 0 },
+            { label: "Description written", done: description.length > 0 },
+          ].map((check) => (
             <div
               key={check.label}
               style={{
-                borderRadius: "1rem",
-                border: "1px solid rgba(148, 163, 184, 0.12)",
-                padding: "0.9rem",
-                background: "rgba(15, 23, 42, 0.38)",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.4rem 0.5rem",
+                borderRadius: "3px",
+                background: "var(--bg-panel)",
+                border: "1px solid var(--border-subtle)",
+                fontSize: "0.8rem",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.4rem" }}>
-                <span
-                  style={{
-                    display: "inline-grid",
-                    placeItems: "center",
-                    width: "1.8rem",
-                    height: "1.8rem",
-                    borderRadius: "999px",
-                    background: index + 1 <= Math.round(completion / 34) ? "rgba(34, 197, 94, 0.22)" : "rgba(148, 163, 184, 0.12)",
-                    color: index + 1 <= Math.round(completion / 34) ? "#86efac" : "#cbd5e1",
-                    fontWeight: 700,
-                  }}
-                >
-                  {index + 1}
-                </span>
-                <strong>{check.label}</strong>
-              </div>
-              <p className="muted" style={{ margin: 0, lineHeight: 1.6 }}>
-                {check.description}
-              </p>
+              <span style={{
+                width: "1.1rem",
+                height: "1.1rem",
+                display: "inline-grid",
+                placeItems: "center",
+                borderRadius: "2px",
+                background: check.done ? "rgba(80, 176, 80, 0.2)" : "var(--bg-inset)",
+                color: check.done ? "var(--green)" : "var(--text-dim)",
+                fontSize: "0.7rem",
+                fontWeight: 700,
+              }}>
+                {check.done ? "\u2713" : "\u00B7"}
+              </span>
+              <span style={{ color: check.done ? "var(--text)" : "var(--text-secondary)" }}>
+                {check.label}
+              </span>
             </div>
           ))}
         </div>
 
-        <button className="button-primary" type="button">
-          Save cloned blueprint
+        {/* Module/beacon badges */}
+        {(usesBeacons || usesModules) && (
+          <div style={{ display: "flex", gap: "0.35rem" }}>
+            {usesBeacons && (
+              <span style={{
+                padding: "0.2rem 0.45rem",
+                borderRadius: "3px",
+                background: "rgba(80, 176, 80, 0.12)",
+                border: "1px solid rgba(80, 176, 80, 0.25)",
+                color: "var(--green)",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+              }}>Beacons</span>
+            )}
+            {usesModules && (
+              <span style={{
+                padding: "0.2rem 0.45rem",
+                borderRadius: "3px",
+                background: "rgba(180, 130, 255, 0.12)",
+                border: "1px solid rgba(180, 130, 255, 0.25)",
+                color: "#b482ff",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+              }}>Modules</span>
+            )}
+          </div>
+        )}
+
+        <button
+          className="button-primary"
+          type="button"
+          style={{ opacity: completion < 100 ? 0.5 : 1, cursor: completion < 100 ? "not-allowed" : "pointer" }}
+          disabled={completion < 100}
+        >
+          Publish blueprint
         </button>
       </aside>
     </div>
   );
 }
-
-const inputStyle = {
-  width: "100%",
-  borderRadius: "0.95rem",
-  border: "1px solid rgba(148, 163, 184, 0.18)",
-  background: "rgba(15, 23, 42, 0.6)",
-  color: "#e2e8f0",
-  padding: "0.95rem 1rem",
-} satisfies React.CSSProperties;

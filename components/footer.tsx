@@ -4,34 +4,32 @@ import { navLinks } from "@/data/site";
 
 export function Footer() {
   return (
-    <footer className="section" style={{ paddingTop: "2rem" }}>
+    <footer style={{ padding: "1.5rem 0 2rem" }}>
       <div className="container">
         <div
-          className="card"
           style={{
-            padding: "1.5rem",
             display: "grid",
-            gap: "1.25rem",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            padding: "1rem",
+            borderTop: "1px solid var(--border)",
           }}
         >
           <div>
-            <p className="eyebrow">Factorio Forge</p>
-            <h2 style={{ margin: "1rem 0 0.5rem", fontSize: "1.35rem" }}>
-              A blueprint workbench for strings, books, layouts, and build costs.
-            </h2>
-            <p className="muted" style={{ margin: 0, maxWidth: "36rem" }}>
-              The home route now behaves more like a tool: inspect the string,
-              view the layout, count the required items, and then browse other
-              shared builds.
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
+              <span className="brand-badge" style={{ width: "1.5rem", height: "1.5rem", fontSize: "0.6rem" }}>FF</span>
+              <strong style={{ fontSize: "0.9rem" }}>Factorio Forge</strong>
+            </div>
+            <p className="muted" style={{ margin: 0, fontSize: "0.8rem", lineHeight: 1.6 }}>
+              Decode, inspect, and share Factorio blueprint strings.
             </p>
           </div>
 
           <div>
-            <h3 style={{ marginTop: 0, fontSize: "1rem" }}>Navigate</h3>
-            <div style={{ display: "grid", gap: "0.65rem" }}>
+            <h4 style={{ margin: "0 0 0.5rem", fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Navigation</h4>
+            <div style={{ display: "grid", gap: "0.35rem" }}>
               {navLinks.map((link) => (
-                <Link key={link.href} href={link.href} className="muted">
+                <Link key={link.href} href={link.href} className="muted" style={{ fontSize: "0.85rem" }}>
                   {link.label}
                 </Link>
               ))}
@@ -39,14 +37,14 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 style={{ marginTop: 0, fontSize: "1rem" }}>Workbench</h3>
+            <h4 style={{ margin: "0 0 0.5rem", fontSize: "0.8rem", color: "var(--text-dim)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Workbench</h4>
             <ul
               className="muted"
-              style={{ margin: 0, paddingLeft: "1rem", display: "grid", gap: "0.55rem" }}
+              style={{ margin: 0, paddingLeft: "1rem", display: "grid", gap: "0.25rem", fontSize: "0.85rem" }}
             >
-              <li>Decode a real Factorio blueprint string</li>
-              <li>Render the entity layout as a readable schema</li>
-              <li>Show the item list needed to build it</li>
+              <li>Decode blueprint strings</li>
+              <li>Render entity layout grids</li>
+              <li>Count required items</li>
             </ul>
           </div>
         </div>

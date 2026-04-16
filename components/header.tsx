@@ -36,8 +36,8 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
-          <Link href="/create" className="button-secondary compact-button">
-            Open create flow
+          <Link href="/create" className="button-primary compact-button">
+            + New blueprint
           </Link>
         </div>
       </div>
