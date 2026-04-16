@@ -1,0 +1,43 @@
+{
+  "name": "factorio-forge",
+  "version": "1.0.0",
+  "description": "A modern blueprint discovery and publishing experience inspired by Factorio Prints.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bibideve/factoriodesign.git"
+  },
+  "keywords": [
+    "factorio",
+    "blueprints",
+    "nextjs",
+    "design"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bibideve/factoriodesign/issues"
+  },
+  "homepage": "https://github.com/bibideve/factoriodesign#readme",
+  "dependencies": {
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.4",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.2"
+  }
+}
